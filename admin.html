@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <script type="text/javascript">
+    (() => {
+      const token = localStorage.getItem("token");
+      if (token == null) {
+        window.location.href = "/login";
+        return;
+      }
+    })();
+  </script>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="img/favicon/favicon-48x48.png" sizes="48x48" />
+  <link rel="icon" type="image/svg+xml" href="img/favicon/favicon.svg" />
+  <link rel="shortcut icon" href="img/favicon/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-touch-icon.png" />
+  <link rel="manifest" href="img/favicon/site.webmanifest" />
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="media/bootstrap-5.3.3-dist/css/bootstrap.min.css">
+  <script src="media/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="media/fontawesome-free-6.6.0-web/css/fontawesome.min.css">
+  <link rel="stylesheet" href="media/fontawesome-free-6.6.0-web/css/brands.min.css">
+  <link rel="stylesheet" href="media/fontawesome-free-6.6.0-web/css/solid.min.css">
+  <!-- Sweet Alert -->
+  <link rel="stylesheet" href="media/sweetalert2-11.14.3-dist/sweetalert2.min.css">
+  <script src="media/sweetalert2-11.14.3-dist/sweetalert2.all.min.js"></script>
+  <!-- jQuery -->
+  <script src="media/jquery-3.7.1.min.js"></script>
+
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="js/admin.js" type="module"></script>
+
+  <title>First Name Surname - Admin</title>
+</head>
+
+<body>
+  <div class="container-fluid">
+    <section class="adminOptions">
+      <nav class="navbar navbar-expand-sm p-0">
+        <a class="navbar-brand" href="#">Administració</a>
+        <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarAdmin"
+          aria-controls="navbarAdmin" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+          <span class="navbar-toggler-icon"></span>
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarAdmin">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+              <button class="btn nav-link clicked botoMenu" id="informacions" title="Llista d'informacions" alt="Llista d'informacions" aria-current="page">Informació</button>
+            </li>
+            <li class="nav-item">
+              <button class="btn nav-link botoMenu" id="dibuixos" title="Llista de dibuixos" alt="Llista de dibuixos">Dibuixos</button>
+            </li>
+            <li class="nav-item">
+              <button class="btn nav-link botoMenu" id="pintures" title="Llista de pintures" alt="Llista de pintures">Pintures</button>
+            </li>
+            <li class="nav-item">
+              <button class="btn nav-link botoMenu" id="poemes" title="Llista de poemes" alt="Llista de poemes">Poemes</button>
+            </li>
+            <li class="nav-item">
+              <button class="btn nav-link px-sm-3 botoMenu" id="user" title="Usuari" alt="Usuari">
+                <i class="fa-solid fa-user"></i>
+              </button>
+            </li>
+            <li class="nav-item">
+              <button class="btn nav-link px-sm-3 botoMenu" id="home" title="Pàgina web" alt="Pàgina web" onclick="(() => window.open('./', '_blank'))()">
+                <i class="fa-solid fa-house"></i>
+              </button>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <div class="d-flex gap-1 container editOptions">
+        <button class="btn botoForm" id="add" title="Afegir element">
+          <i class="fa-solid fa-plus"></i>
+        </button>
+        <button class="btn botoForm" id="modify" title="Modificar element" disabled>
+          <i class="fa-solid fa-pen-to-square"></i>
+        </button>
+        <button class="btn botoForm" id="delete" title="Esborrar element" disabled>
+          <i class="fa-solid fa-trash"></i>
+        </button>
+      </div>
+    </section>
+
+    <div class="container contingut">
+      <section class="usuari d-none">
+        <form class="userForm needs-validation" id="userForm" novalidate>
+          <h4 class="titolForm">Modificar usuari</h4>
+          <div class="col-md-6 mb-3">
+            <label for="username" class="form-label">Nom d'usuari</label>
+            <input type="text" class="form-control" id="username" required>
+            <div class="invalid-feedback">Camp obligatori (només pot contenir lletres sense accents, números i els caràcters '.' i '_')</div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="password" class="form-label">Contrasenya</label>
+            <input type="password" class="form-control" id="password" minlength="6" required>
+            <div class="invalid-feedback">Camp obligatori (mínim 6 caràcters)</div>
+          </div>
+          <div class="col-12">
+            <button type="submit" class="btn botoForm" title="Modificar" alt="Modificar">
+              <i class="fa-solid fa-floppy-disk"></i>
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <section class="adminList d-none">
+        <div class="informacions d-none">
+          <ul class="llistaElements">
+            <li class="element informacio d-none" id="templateInformacio">
+              <span class="nomElement"></span>
+              <div class="propietatsElement">
+                <div class="templatePropietat">
+                  <span class="propietat"></span>
+                  <span class="valor"></span>
+                </div>
+              </div>
+            </li>
+          </ul>
+          <div class="pagination pagInfo"></div>
+        </div>
+
+        <div class="dibuixos d-none">
+          <ul class="llistaElements">
+            <li class="element dibuix d-none" id="templateDibuix">
+              <span class="nomElement"></span>
+              <img class="imatgeElement"/>
+              <span class="descripcioElement"></span>
+            </li>
+          </ul>
+          <div class="pagination pagDibu"></div>
+        </div>
+
+        <div class="pintures d-none">
+          <ul class="llistaElements">
+            <li class="element pintura d-none" id="templatePintura">
+              <span class="nomElement"></span>
+              <img class="imatgeElement"/>
+              <span class="descripcioElement"></span>
+            </li>
+          </ul>
+          <div class="pagination pagPint"></div>
+        </div>
+
+        <div class="poemes d-none">
+          <ul class="llistaElements">
+            <li class="element poema d-none" id="templatePoema">
+              <span class="nomElement"></span>
+              <img class="imatgeElement"/>
+              <span class="descripcioElement"></span>
+            </li>
+          </ul>
+          <div class="pagination pagPoem"></div>
+        </div>
+      </section>
+
+      <section class="adminItem d-none">
+        <form class="row adminForm needs-validation d-none" id="infoForm" novalidate>
+          <h4 class="titolForm">Afegir llengua</h4>
+          <div class="col-md-6 mb-3">
+            <label for="nomIdioma" class="form-label">Nom idioma</label>
+            <input type="text" class="form-control" id="nomIdioma" required>
+            <div class="invalid-feedback">Camp obligatori (només pot contenir lletres)</div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="idioma" class="form-label">Idioma</label>
+            <input type="text" class="form-control" id="idioma" aria-describedby="idiomaHelp" required>
+            <div id="idiomaHelp" class="form-text">Format de 2 caràcters ('ca', 'en', 'es')</div>
+            <div class="invalid-feedback">Camp obligatori (només pot contenir lletres)</div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="benvinguda" class="form-label">Benvinguda</label>
+            <input type="text" class="form-control" id="benvinguda" aria-describedby="benvingudaHelp" required>
+            <div id="benvingudaHelp" class="form-text">Text de benvinguda que descriu el contingut de la web com una descripció</div>
+            <div class="invalid-feedback">Camp obligatori</div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="titol" class="form-label">Títol</label>
+            <input type="text" class="form-control" id="titol" aria-describedby="titolHelp" required>
+            <div id="titolHelp" class="form-text">Títol de la pàgina web</div>
+            <div class="invalid-feedback">Camp obligatori</div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="titol2" class="form-label">Primer apartat</label>
+            <input type="text" class="form-control" id="titol2" aria-describedby="titol2Help" required>
+            <div id="titol2Help" class="form-text">Primer bloc de continguts</div>
+            <div class="invalid-feedback">Camp obligatori</div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="titol3" class="form-label">Segon apartat</label>
+            <input type="text" class="form-control" id="titol3" aria-describedby="titol3Help" required>
+            <div id="titol3Help" class="form-text">Segon bloc de continguts</div>
+            <div class="invalid-feedback">Camp obligatori</div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="titol4" class="form-label">Tercer apartat</label>
+            <input type="text" class="form-control" id="titol4" aria-describedby="titol4Help" required>
+            <div id="titol4Help" class="form-text">Tercer bloc de continguts</div>
+            <div class="invalid-feedback">Camp obligatori</div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="titol5" class="form-label">Inici</label>
+            <input type="text" class="form-control" id="titol5" aria-describedby="titol5Help" required>
+            <div id="titol5Help" class="form-text">Referència a l'apartat principal de la pàgina web</div>
+            <div class="invalid-feedback">Camp obligatori</div>
+          </div>
+          <div class="col-12">
+            <button type="submit" class="btn botoForm" title="Guardar" alt="Guardar">
+              <i class="fa-solid fa-floppy-disk"></i>
+            </button>
+          </div>
+        </form>
+
+        <form class="row adminForm needs-validation d-none" id="dibuixForm" novalidate>
+          <h4 class="titolForm">Afegir dibuix</h4>
+          <div class="col-md-4 mb-3">
+            <label for="fotoDibuix" class="form-label">Foto</label>
+            <input type="file" class="form-control" id="fotoDibuix" accept="image/*" required>
+            <div class="invalid-feedback">Camp obligatori</div>
+          </div>
+          <div class="col-md-4 mb-3">
+            <label for="nomDibuix" class="form-label">Nom</label>
+            <input type="text" class="form-control" id="nomDibuix" required>
+            <div class="invalid-feedback">Camp obligatori (només pot contenir lletres)</div>
+          </div>
+          <div class="col-md-4 mb-3">
+            <label for="descDibuix" class="form-label">Descripció</label>
+            <input type="text" class="form-control" id="descDibuix">
+            <div class="invalid-feedback">Només pot contenir lletres, números i signes de puntuació</div>
+          </div>
+          <div class="col-12">
+            <button type="submit" class="btn botoForm" title="Guardar" alt="Guardar">
+              <i class="fa-solid fa-floppy-disk"></i>
+            </button>
+          </div>
+        </form>
+
+        <form class="row adminForm needs-validation d-none" id="pinturaForm" novalidate>
+          <h4 class="titolForm">Afegir pintura</h4>
+          <div class="col-md-4 mb-3">
+            <label for="fotoPintura" class="form-label">Foto</label>
+            <input type="file" class="form-control" id="fotoPintura" accept="image/*" required>
+            <div class="invalid-feedback">Camp obligatori</div>
+          </div>
+          <div class="col-md-4 mb-3">
+            <label for="nomPintura" class="form-label">Nom</label>
+            <input type="text" class="form-control" id="nomPintura" required>
+            <div class="invalid-feedback">Camp obligatori (només pot contenir lletres)</div>
+          </div>
+          <div class="col-md-4 mb-3">
+            <label for="descPintura" class="form-label">Descripció</label>
+            <input type="text" class="form-control" id="descPintura">
+            <div class="invalid-feedback">Només pot contenir lletres, números i signes de puntuació</div>
+          </div>
+          <div class="col-12">
+            <button type="submit" class="btn botoForm" title="Guardar" alt="Guardar">
+              <i class="fa-solid fa-floppy-disk"></i>
+            </button>
+          </div>
+        </form>
+
+        <form class="row adminForm needs-validation d-none" id="poemaForm" novalidate>
+          <h4 class="titolForm">Afegir poema</h4>
+          <div class="col-md-6 mb-3">
+            <label for="fotoPoema" class="form-label">Foto</label>
+            <input type="file" class="form-control" id="fotoPoema" accept="image/*" required>
+            <div class="invalid-feedback">Camp obligatori</div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="nomPoema" class="form-label">Nom</label>
+            <input type="text" class="form-control" id="nomPoema" required>
+            <div class="invalid-feedback">Camp obligatori (només pot contenir lletres)</div>
+          </div>
+          <div class="col-md-12 mb-3">
+            <label for="textPoema" class="form-label">Text</label>
+            <textarea class="form-control" id="textPoema" rows="5" required></textarea>
+            <div class="invalid-feedback">Camp obligatori</div>
+          </div>
+          <div class="col-12">
+            <button type="submit" class="btn botoForm" title="Guardar" alt="Guardar">
+              <i class="fa-solid fa-floppy-disk"></i>
+            </button>
+          </div>
+        </form>
+
+        <button class="btn botoForm btnTornar" title="Tornar al llistat" alt="Tornar al llistat" onclick="(() => window.location.href='#')()">
+          <i class="fa solid fa-caret-up"></i>
+        </button>
+      </section>
+    </div>
+  </div>
+</body>
+
+</html>

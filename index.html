@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="img/favicon/favicon-48x48.png" sizes="48x48" />
+  <link rel="icon" type="image/svg+xml" href="img/favicon/favicon.svg" />
+  <link rel="shortcut icon" href="img/favicon/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-touch-icon.png" />
+  <link rel="manifest" href="img/favicon/site.webmanifest" />
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="media/bootstrap-5.3.3-dist/css/bootstrap.min.css">
+  <script src="media/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="media/fontawesome-free-6.6.0-web/css/fontawesome.min.css">
+  <link rel="stylesheet" href="media/fontawesome-free-6.6.0-web/css/brands.min.css">
+  <link rel="stylesheet" href="media/fontawesome-free-6.6.0-web/css/solid.min.css">
+  <!-- Sweet Alert -->
+  <link rel="stylesheet" href="media/sweetalert2-11.14.3-dist/sweetalert2.min.css">
+  <script src="media/sweetalert2-11.14.3-dist/sweetalert2.all.min.js"></script>
+  <!-- jQuery -->
+  <script src="media/jquery-3.7.1.min.js"></script>
+
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="js/index.js" type="module"></script>
+
+  <title>First Name Surname</title>
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div class="main-wrapper row">
+      <div class="side-left-nav col-12 col-sm-1 col-md-2">
+        <div class="social-links">
+          <button class="btn" data-link="mailto:example@example.com" title="Email" alt="Email">
+            <i class="fa-regular fa-envelope fa-lg"></i>
+          </button>
+          <button class="btn" data-link="https://open.spotify.com/album/6flLo7vB2umE8Yii6zXvXO?si=z-AZXPz8SdGI-rUfTj065w&nd=1&dlsi=a67c1ac030c84fe0" title="Spotify" alt="Spotify">
+            <i class="fab fa-spotify fa-lg"></i>
+          </button>
+          <button class="btn" data-link="https://firstnamesurname.bandcamp.com/" title="Bandcamp" alt="Bandcamp">
+            <i class="fab fa-bandcamp fa-lg"></i>
+          </button>
+          <button class="btn" data-link="https://www.instagram.com/first.name.surname/" title="Instagram" alt="Instagram">
+            <i class="fab fa-instagram fa-lg"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="content-wrapper col">
+        <section id="main" class="info">
+          <h1></h1>
+          <p id="welcome-text"></p>
+        </section>
+
+        <div class="idiomes">
+          <div class="btn-group" role="group">
+            <button type="button" class="btn botoMenu langTemplate d-none" data-language="" title="" alt="">ND</button>
+          </div>
+        </div>
+
+        <section id="songs" class="container-fluid cansons">
+          <h2 id="title-2">SONGS</h2>
+          <div id="section2-regular" class="row">
+            <div class="col-12 col-md-6 col-lg-4 music-player">
+              <iframe style="max-height: 50vh;" src="https://bandcamp.com/EmbeddedPlayer/album=1837259089/size=large/bgcol=ffffff/linkcol=0687f5/artwork=small/transparent=true/"
+                seamless>
+                <a href="https://firstnamesurname.bandcamp.com/album/songs">Songs by First Name Surname</a>
+              </iframe>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4 music-player">
+              <iframe style="max-height: 50vh;" class="player" src="https://open.spotify.com/embed/album/6flLo7vB2umE8Yii6zXvXO?utm_source=generator&amp;theme=0"
+                width="100%" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy">
+              </iframe>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4 music-player">
+              <iframe style="max-height: 50vh;" src="https://bandcamp.com/EmbeddedPlayer/album=3838741090/size=large/bgcol=ffffff/linkcol=0687f5/artwork=small/transparent=true/"
+                seamless>
+                <a href="https://firstnamesurname.bandcamp.com/album/more-songs">More Songs by First Name Surname</a>
+              </iframe>
+            </div>
+          </div>
+        </section>
+
+        <section id="drawings" class="dibuixos">
+          <h2 id="title-3"></h2>
+          <div id="carouselDibuixos" class="carousel customCarousel" data-bs-interval="false">
+            <div class="carousel-indicators">
+              <button type="button" data-bs-target="#carouselDibuixos" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            </div>
+            <div class="carousel-inner" role="listbox">
+              <div class="carousel-item active">
+                <div class="card">
+                  <img src="#" class="d-block" alt="Image 1">
+                </div>
+              </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselDibuixos" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselDibuixos" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+
+          <div id="carouselPintures" class="carousel customCarousel mt-4" data-bs-interval="false">
+            <div class="carousel-indicators">
+              <button type="button" data-bs-target="#carouselPintures" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            </div>
+            <div class="carousel-inner" role="listbox">
+              <div class="carousel-item active">
+                <div class="card">
+                  <img src="#" class="d-block" alt="Image 1">
+                </div>
+              </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselPintures" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselPintures" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+        </section>
+
+        <section id="poems" class="poemes">
+          <h2 id="title-4"></h2>
+          <div id="carouselPoemes" class="carousel defaultCarousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+              <button type="button" data-bs-target="#carouselPoemes" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            </div>
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img src="#" class="d-block w-100" alt="Poema 1">
+                <div class="carousel-caption d-none d-md-block">
+                  <h5 class="titolImatge">Post Image 1</h5>
+                  <p class="textImatge">Text 1</p>
+                </div>
+              </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselPoemes" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselPoemes" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+        </section>
+      </div>
+
+      <div class="side-right-nav col-12 col-sm-1 col-md-2">
+        <div class="navbar navbar-expand-md p-0 menuLateral" style="width: inherit;">
+          <button class="navbar-toggler collapsed botoMenu" type="button" data-bs-toggle="collapse" data-bs-target="#menu"
+            aria-controls="menu" aria-expanded="false" aria-label="Toggle navigation" alt="Menu" title="Menu">
+            <div class="hamburger">
+              <span class="icon-bar top-bar"></span>
+              <span class="icon-bar middle-bar"></span>
+              <span class="icon-bar bottom-bar"></span>
+            </div>
+          </button>
+          <div class="collapse navbar-collapse" id="menu">
+            <ul class="navbar-nav nav flex-column">
+              <li class="nav-item songs">
+                <a id="first-nav-link" class="nav-link" href="#songs" title="SONGS" alt="SONGS"><span class="navOcult">SONGS</span></a>
+              </li>
+              <li class="nav-item drawings">
+                <a id="second-nav-link" class="nav-link" href="#drawings" title="DRAWINGS & PAINTINGS"
+                  alt="DRAWINGS & PAINTINGS"><span class="navOcult">DRAWINGS &<br>PAINTINGS</span></a>
+              </li>
+              <li class="nav-item poems">
+                <a id="third-nav-link" class="nav-link" href="#poems" title="POEMS" alt="POEMS"><span class="navOcult">POEMS</span></a>
+              </li>
+              <li class="nav-item active main">
+                <a id="last-nav-link" class="nav-link titol" href="#main" title="Main" alt="Main"><span class="navOcult">FIRST NAME<br>SURNAME</span></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="row">
+      <span>&copy; 2024 Your Company Name. All rights reserved.</span>
+    </footer>
+  </div>
+</body>
+
+</html>
