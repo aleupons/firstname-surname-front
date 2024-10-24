@@ -1,4 +1,5 @@
 import { loadInformacions, loadDibuixos, loadPintures, loadPoemes } from "/js/data.js";
+import { dataNotFound } from "/js/alerts.js";
 
 /* Idiomes */
 const changeLanguage = async (lang, generarBotons) => {
