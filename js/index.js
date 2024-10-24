@@ -101,6 +101,9 @@ const responsiveCarousel = (carouselId) => {
       interval: false,
       wrap: false,
     });
+    if (!$(`#${carouselId} .carousel-inner`).length) {
+      return;
+    }
     const carouselWidth = $(`#${carouselId} .carousel-inner`)[0].scrollWidth;
     const cardWidth = $(`#${carouselId} .carousel-item`).width();
     const numItems = $(`#${carouselId} .carousel-item`).length;
