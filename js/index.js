@@ -236,8 +236,11 @@ const setCarousel = (carouselId, dades) => {
 };
 /* */
 
-changeLanguage(localStorage.getItem("language") ?? navigator.language, true);
 $(document).ready(async function() {
+  /* Idiomes */
+  changeLanguage(localStorage.getItem("language") ?? navigator.language, true);
+  /* */
+
   /* Dades */
   setCustomCarousel("carouselDibuixos", await loadDibuixos());
   setCustomCarousel("carouselPintures", await loadPintures());
