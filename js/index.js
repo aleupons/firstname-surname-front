@@ -33,8 +33,8 @@ const changeLanguage = async (lang, generarBotons) => {
       nouIdioma.attr("title", informacio.language);
       nouIdioma.attr("alt", informacio.language);
       nouIdioma.text(informacio.lang.toUpperCase());
-      nouIdioma.on("click", (e) => {
-        changeLanguage($(e.currentTarget).data("language"), false);
+      nouIdioma.on("click", async (e) => {
+        await changeLanguage($(e.currentTarget).data("language"), false);
       });
       $(".idiomes .btn-group").append(nouIdioma);
     });
@@ -236,13 +236,11 @@ const setCarousel = (carouselId, dades) => {
 };
 /* */
 
-document.addEventListener("DOMContentLoaded", function(event) {
-  /* Idiomes */
-  changeLanguage(localStorage.getItem("language") ?? navigator.language, true);
-  /* */
-});
-
 $(document).ready(async function() {
+  /* Idiomes */
+  await changeLanguage(localStorage.getItem("language") ?? navigator.language, true);
+  /* */
+
   /* Dades */
   setCustomCarousel("carouselDibuixos", await loadDibuixos());
   setCustomCarousel("carouselPintures", await loadPintures());
