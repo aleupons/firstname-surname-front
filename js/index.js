@@ -3,6 +3,9 @@ import { dataNotFound } from "/js/alerts.js";
 
 /* Idiomes */
 const changeLanguage = async (lang, generarBotons) => {
+  if (!lang) {
+    lang == "ca";
+  }
   localStorage.setItem("language", lang);
   const informacions = await loadInformacions();
 
@@ -16,9 +19,9 @@ const changeLanguage = async (lang, generarBotons) => {
   const thirdNavLink = document.getElementById('third-nav-link');
   const lastNavLink = document.getElementById('last-nav-link');
 
-  // if (!informacions || !informacions.filter((informacio) => informacio.lang == lang).length) {
-  //   return;
-  // }
+  if (!informacions || !informacions.filter((informacio) => informacio.lang == lang).length) {
+    return;
+  }
 
   $(".idiomes button:not(.langTemplate)").each(function () {
     $(this).remove();
