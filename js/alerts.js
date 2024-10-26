@@ -7,14 +7,15 @@ export const pageNotFound = () => {
   $(".main-wrapper").css("height", `calc(100vh - ${$("footer").outerHeight()}px)`);
 };
 
-export const dataNotFound = (selectorElement, info) => {
-  $(selectorElement).html(`
+export const dataNotFound = (selectorElement, timer) => {
+  const alerta = $(`
     <div class="alert alert-warning d-flex align-items-center justify-content-center mt-4">
       <p class="text text-warning">Data not found</p>
     </div>
   `);
-  if (info) {
-    $(".main-wrapper").css("height", `calc(100vh - ${$("footer").outerHeight()}px)`);
+  alerta.insertBefore($(selectorElement));
+  if (timer) {
+    window['timer_' + "dataAlert"] = setTimeout(() => alerta.remove(), 3500);
   }
 };
 
@@ -25,7 +26,7 @@ export const errorPeticio = (selectorElement, missatge) => {
     alerta.find(".text").text(missatge);
   } else {
     alerta = $(`
-      <div class="alert alert-danger d-flex align-items-center justify-content-center mt-4" id="errAlert">
+      <div class="alert alert-danger d-flex align-items-center justify-content-center mt-4 peticio" id="errAlert">
         <p class="text text-danger">${missatge}</p>
       </div>
     `);
@@ -41,7 +42,7 @@ export const okPeticio = (selectorElement, missatge) => {
     alerta.find(".text").text(missatge);
   } else {
     alerta = $(`
-      <div class="alert alert-success d-flex align-items-center justify-content-center mt-4" id="okAlert">
+      <div class="alert alert-success d-flex align-items-center justify-content-center mt-4 peticio" id="okAlert">
         <p class="text text-success">${missatge}</p>
       </div>
     `);

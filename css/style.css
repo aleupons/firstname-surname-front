@@ -183,7 +183,7 @@ li.nav-item:not(.active) .titol:not(:hover) {
   margin-bottom: 2rem;
 }
 
-.alert {
+.alert.peticio {
   position: fixed;
   bottom: 0;
   text-wrap: nowrap;

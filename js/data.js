@@ -1,10 +1,22 @@
-// export const urlAPI = "http://localhost:5000/";
-export const urlAPI = "https://firstname-surname-back.onrender.com/";
+export const urlAPI = "http://localhost:5000/";
+// export const urlAPI = "https://firstname-surname-back.onrender.com/";
 
 //Llistes
 export const loadInformacions = async () => {
   try {
     const resp = await fetch(`${urlAPI}informacions/list`);
+    if (!resp.ok) {
+      return false;
+    }
+    return await resp.json();
+  } catch (error) {
+    return false;
+  }
+};
+
+export const loadCansons = async () => {
+  try {
+    const resp = await fetch(`${urlAPI}cansons/list`);
     if (!resp.ok) {
       return false;
     }

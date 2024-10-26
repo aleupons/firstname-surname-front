@@ -1,5 +1,5 @@
 import { errorPeticio, okPeticio, dataNotFound } from "/js/alerts.js";
-import { loadInformacions, loadDibuixos, loadPintures, loadPoemes } from "/js/data.js";
+import { loadInformacions, loadCansons, loadDibuixos, loadPintures, loadPoemes } from "/js/data.js";
 import { getMyUser, modifyUser } from "/js/data.js";
 import { newElement, getElement, modifyElement, deleteElement } from "/js/data.js";
 
@@ -16,7 +16,8 @@ const llistaInformacions = async () => {
   const informacions = await loadInformacions();
   $(".adminList").prevAll(".carregant:first").addClass("d-none");
   if (!informacions) {
-    dataNotFound(".contingut");
+    dataNotFound(".contingut", true);
+    $(".adminList").addClass("d-none");
     return;
   }
   if (!$(".informacions ul li:not(#templateInformacio)").length) {
@@ -55,6 +56,51 @@ const afegirInformacio = (informacio, replace) => {
   return novaInformacio;
 };
 
+const llistaCansons = async () => {
+  deseleccionarElements();
+  const cansons = await loadCansons();
+  $(".adminList").prevAll(".carregant:first").addClass("d-none");
+  if (!cansons) {
+    dataNotFound(".contingut", true);
+    $(".adminList").addClass("d-none");
+    return;
+  }
+  if (!$(".cansons ul li:not(#templateCanso)").length) {
+    cansons.map((canso) => {
+      afegirCanso(canso);
+    });
+  }
+  $(".adminList").removeClass("d-none");
+  $(".llistaElements").each(function () {
+    $(this).parent().addClass("d-none");
+  });
+  $(".cansons").removeClass("d-none");
+  seleccionarElement();
+  pagination("cansons");
+};
+
+const afegirCanso = (canso, replace) => {
+  const template = $(".cansons .llistaElements #templateCanso");
+  const novaCanso = template.clone().removeClass("d-none");
+  novaCanso.attr("id", canso._id);
+  novaCanso.find(".nomElement").text(canso.name);
+  const templateProp = novaCanso.find(".templatePropietat");
+  for (const propietat in canso) {
+      if (propietat != "_id" && propietat != "name") {
+        const novaPropietat = templateProp.clone();
+        novaPropietat.find(".propietat").text(propietat);
+        novaPropietat.find(".valor").text(canso[propietat]);
+        novaPropietat.removeClass("templatePropietat").addClass("propietatElement");
+        novaPropietat.appendTo(templateProp.parent());
+      }
+  }
+  templateProp.remove();
+  if (!replace) {
+    novaCanso.appendTo(template.parent());
+  }
+  return novaCanso;
+};
+
 const llistaDibuixosPinturesPoemes = async (tipus) => {
   deseleccionarElements();
   if (!$(`.${tipus} ul li:not([id^='template'])`).length) {
@@ -65,7 +111,8 @@ const llistaDibuixosPinturesPoemes = async (tipus) => {
         elements = await loadDibuixos();
         $(".adminList").prevAll(".carregant:first").addClass("d-none");
         if (!elements) {
-          dataNotFound(".adminList");
+          dataNotFound(".contingut", true);
+          $(".adminList").addClass("d-none");
           return;
         }
         singular = "Dibuix";
@@ -74,7 +121,8 @@ const llistaDibuixosPinturesPoemes = async (tipus) => {
         elements = await loadPintures();
         $(".adminList").prevAll(".carregant:first").addClass("d-none");
         if (!elements) {
-          dataNotFound(".adminList");
+          dataNotFound(".contingut", true);
+          $(".adminList").addClass("d-none");
           return;
         }
         singular = "Pintura";
@@ -83,7 +131,8 @@ const llistaDibuixosPinturesPoemes = async (tipus) => {
         elements = await loadPoemes();
         $(".adminList").prevAll(".carregant:first").addClass("d-none");
         if (!elements) {
-          dataNotFound(".adminList");
+          dataNotFound(".contingut", true);
+          $(".adminList").addClass("d-none");
           return;
         }
         singular = "Poema";
@@ -136,6 +185,9 @@ $(".adminOptions ul button:not(#home)").on("click", async function () {
   switch (id) {
     case "informacions":
       await llistaInformacions();
+      break;
+    case "cansons":
+      await llistaCansons();
       break;
     case "dibuixos":
     case "pintures":
@@ -191,16 +243,19 @@ const deseleccionarElements = () => {
 
 const tipusVisible = () => {
   let target, ruta;
-  if ($(".llistaElements:visible").parent().hasClass("informacions")) {
+  if ($("button#informacions").hasClass("clicked") || $(".llistaElements:visible").parent().hasClass("informacions")) {
     target = $("#infoForm");
     ruta = "informacions/informacio";
-  } else if ($(".llistaElements:visible").parent().hasClass("dibuixos")) {
+  } else if ($("button#cansons").hasClass("clicked") || $(".llistaElements:visible").parent().hasClass("cansons")) {
+    target = $("#cansoForm");
+    ruta = "cansons/canso";
+  } else if ($("button#dibuixos").hasClass("clicked") || $(".llistaElements:visible").parent().hasClass("dibuixos")) {
     target = $("#dibuixForm");
     ruta = "dibuixos/dibuix";
-  } else if ($(".llistaElements:visible").parent().hasClass("pintures")) {
+  } else if ($("button#pintures").hasClass("clicked") || $(".llistaElements:visible").parent().hasClass("pintures")) {
     target = $("#pinturaForm");
     ruta = "pintures/pintura";
-  } else if ($(".llistaElements:visible").parent().hasClass("poemes")) {
+  } else if ($("button#poemes").hasClass("clicked") || $(".llistaElements:visible").parent().hasClass("poemes")) {
     target = $("#poemaForm");
     ruta = "poemes/poema";
   }
@@ -284,6 +339,7 @@ const unFillForm = () => {
   $(".adminItem form").each(function () {
     $(this).find("input, textarea").each(function () {
       $(this).val("");
+      $(this).prop("checked", false);
       if ($(this).is("[id^=foto]")) {
         $(this).attr("required", true);
       }
@@ -308,6 +364,11 @@ const fillForm = async (target, ruta) => {
       target.find("#section2").val(data.section2);
       target.find("#section3").val(data.section3);
       target.find("#sectionHome").val(data.home);
+      break;
+    case "cansoForm":
+      target.find("#nameCanso").val(data.name);
+      target.find("#iframeCanso").val(data.iframe);
+      target.find("#spotifyCanso").prop("checked", data.spotify);
       break;
     case "dibuixForm":
       target.find("#fotoDibuix").removeAttr("required");
@@ -350,6 +411,16 @@ const crudElement = async (accio, target, ruta) => {
       text = "Informació";
       gen = "F";
       tipus = "informacions";
+      break;
+    case "cansoForm":
+      formData = {
+        name: target.find("#nameCanso").val(),
+        iframe: target.find("#iframeCanso").val(),
+        spotify: target.find("#spotifyCanso").prop("checked"),
+      };
+      text = "Iframe";
+      gen = "M";
+      tipus = "cansons";
       break;
     case "dibuixForm":
       const dadesD = {
@@ -399,12 +470,16 @@ const crudElement = async (accio, target, ruta) => {
 
   switch (accio) {
     case "add":
-      const respAdd = await newElement(tipus != "informacions", formData, token, `${ruta.substring(0, ruta.indexOf("/") + 1)}new-${ruta.substr(ruta.indexOf("/") + 1)}`);
+      const respAdd = await newElement(tipus != "informacions" && tipus != "cansons", formData, token, `${ruta.substring(0, ruta.indexOf("/") + 1)}new-${ruta.substr(ruta.indexOf("/") + 1)}`);
       if (respAdd.error) {
         errorPeticio(".adminItem", respAdd.message);
       } else {
         okPeticio(".adminItem", `${text} ${gen == "M" ? "afegit" : "afegida"}`);
-        const elementAfegit = tipus == "informacions" ? afegirInformacio(respAdd) : afegirDibuixPinturaPoema(respAdd, tipus, text);
+        const elementAfegit = tipus == "informacions"
+          ? afegirInformacio(respAdd)
+          : tipus == "cansons"
+            ? afegirCanso(respAdd)
+            : afegirDibuixPinturaPoema(respAdd, tipus, text);
         seleccionarElement();
         pagination(tipus);
       }
@@ -422,12 +497,16 @@ const crudElement = async (accio, target, ruta) => {
       } else {
         foto = true;
       }
-      const respMod = await modifyElement(tipus != "informacions" && foto, formData, id, token, !foto ? `${ruta}-no-image` : ruta);
+      const respMod = await modifyElement(tipus != "informacions" && tipus != "cansons" && foto, formData, id, token, !foto ? `${ruta}-no-image` : ruta);
       if (respMod.error) {
         errorPeticio(".adminItem", respMod.message);
       } else {
         okPeticio(".adminItem", `${text} ${gen == "M" ? "modificat" : "modificada"}`);
-        const elementModificat = tipus == "informacions" ? afegirInformacio(respMod, true) : afegirDibuixPinturaPoema(respMod, tipus, text, true);
+        const elementModificat = tipus == "informacions"
+          ? afegirInformacio(respMod, true)
+          : tipus == "cansons"
+            ? afegirCanso(respMod, true)
+            : afegirDibuixPinturaPoema(respMod, tipus, text, true);
         const elementAntic = $(`li.element[id="${id}"]`);
         elementAntic.replaceWith(elementModificat.attr("id", elementAntic.attr("id")));
         seleccionarElement();

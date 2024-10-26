@@ -66,6 +66,9 @@
               <button class="btn nav-link clicked botoMenu" id="informacions" title="Llista d'informacions" alt="Llista d'informacions" aria-current="page">Idiomes</button>
             </li>
             <li class="nav-item">
+              <button class="btn nav-link botoMenu" id="cansons" title="Llista d'iframes de música" alt="Llista d'iframes de música">Cançons</button>
+            </li>
+            <li class="nav-item">
               <button class="btn nav-link botoMenu" id="dibuixos" title="Llista de dibuixos" alt="Llista de dibuixos">Dibuixos</button>
             </li>
             <li class="nav-item">
@@ -132,6 +135,21 @@
         <div class="informacions d-none">
           <ul class="llistaElements">
             <li class="element informacio d-none" id="templateInformacio">
+              <span class="nomElement"></span>
+              <div class="propietatsElement">
+                <div class="templatePropietat">
+                  <span class="propietat"></span>
+                  <span class="valor"></span>
+                </div>
+              </div>
+            </li>
+          </ul>
+          <div class="pagination pagInfo"></div>
+        </div>
+
+        <div class="cansons d-none">
+          <ul class="llistaElements">
+            <li class="element canso d-none" id="templateCanso">
               <span class="nomElement"></span>
               <div class="propietatsElement">
                 <div class="templatePropietat">
@@ -221,6 +239,31 @@
             <input type="text" class="form-control" id="sectionHome" aria-describedby="sectionHomeHelp" required>
             <div id="sectionHomeHelp" class="form-text">Referència a l'apartat principal de la pàgina web</div>
             <div class="invalid-feedback">Camp obligatori</div>
+          </div>
+          <div class="col-12 d-flex justify-content-between">
+            <button type="submit" class="btn botoForm" title="Guardar" alt="Guardar">
+              <i class="fa-solid fa-floppy-disk"></i>
+            </button>
+            <div class="btn botoForm btnTornar" title="Tornar al llistat" alt="Tornar al llistat" onclick="(() => window.location.href='#')()">
+              <i class="fa solid fa-caret-up"></i>
+            </div>
+          </div>
+        </form>
+
+        <form class="row adminForm needs-validation d-none" id="cansoForm" novalidate>
+          <h4 class="titolForm">Afegir iframe embedder</h4>
+          <div class="col-12 mb-3">
+            <label for="nameCanso" class="form-label">Nom</label>
+            <input type="text" class="form-control" id="nameCanso">
+          </div>
+          <div class="col-12 mb-3">
+            <label for="iframeCanso" class="form-label">Codi</label>
+            <textarea type="text" class="form-control" id="iframeCanso" rows="4" required></textarea>
+            <div class="invalid-feedback">Camp obligatori</div>
+          </div>
+          <div class="col-12 mb-3">
+            <input type="checkbox" value="true" class="form-check-input" id="spotifyCanso">
+            <label for="spotifyCanso" class="form-check-label">Spotify</label>
           </div>
           <div class="col-12 d-flex justify-content-between">
             <button type="submit" class="btn botoForm" title="Guardar" alt="Guardar">

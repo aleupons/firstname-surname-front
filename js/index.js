@@ -1,4 +1,4 @@
-import { loadInformacions, loadDibuixos, loadPintures, loadPoemes } from "/js/data.js";
+import { loadInformacions, loadCansons, loadDibuixos, loadPintures, loadPoemes } from "/js/data.js";
 import { dataNotFound } from "/js/alerts.js";
 
 /* Idiomes */
@@ -180,12 +180,33 @@ window.addEventListener("resize", () => {
 /* */
 
 /* Dades */
+const setCansons = (containerSelector, dades) => {
+  $(`#${containerSelector}`).removeClass("carregantDades");
+  $(`#${containerSelector}`).parent().prev(".carregant").addClass("d-none");
+  if (!dades) {
+    dataNotFound(`#${containerSelector}`);
+    $(`#${containerSelector}`).addClass("d-none");
+    return;
+  }
+  const template = $(`#${containerSelector}`);
+  dades.map((dada, i) => {
+    const nouElement = template.clone();
+    nouElement.html(dada.iframe);
+    nouElement.find("iframe").removeAttr("style");
+    if (dada.spotify) {
+      nouElement.addClass("player");
+    }
+    nouElement.appendTo(template.parent());
+  });
+  template.remove();
+};
+
 const setCustomCarousel = (carouselId, dades) => {
   $(`#${carouselId}`).removeClass("carregantDades");
   $(`#${carouselId}`).prevAll(".carregant:first").addClass("d-none");
   if (!dades) {
     dataNotFound(`#${carouselId}`);
-    $();
+    $(`#${carouselId}`).addClass("d-none");
     return;
   }
   const template = $(`#${carouselId} .carousel-inner .carousel-item`);
@@ -218,6 +239,7 @@ const setCarousel = (carouselId, dades) => {
   $(`#${carouselId}`).prevAll(".carregant:first").addClass("d-none");
   if (!dades) {
     dataNotFound(`#${carouselId}`);
+    $(`#${carouselId}`).addClass("d-none");
     return;
   }
   const template = $(`#${carouselId} .carousel-inner .carousel-item`);
@@ -255,6 +277,7 @@ $(document).ready(async function() {
   /* */
 
   /* Dades */
+  setCansons("songs .music-player", await loadCansons());
   setCustomCarousel("carouselDibuixos", await loadDibuixos());
   setCustomCarousel("carouselPintures", await loadPintures());
   setCarousel("carouselPoemes", await loadPoemes());
