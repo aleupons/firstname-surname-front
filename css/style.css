@@ -376,6 +376,25 @@ footer {
     height: 100%;
     object-fit: contain;
   }
+
+#carouselPoemes .carousel-item img {
+  opacity: 0.6;
+}
+
+#carouselPoemes .carousel-item .carousel-caption {
+  display: initial !important;
+  color: var(--color-principal);
+  bottom: 50%;
+  left: 0;
+  transform: translate(0, 50%);
+  background-color: rgba(112, 108, 97, 0.7);
+  width: 100%;
+  padding-inline: 4rem;
+}
+
+#carouselPoemes .carousel-item .carousel-caption .titolImatge {
+  font-weight: bold;
+}
 /*  */
 
 /* Buttons */

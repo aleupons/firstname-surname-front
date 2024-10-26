@@ -194,7 +194,7 @@ const setCansons = (containerSelector, dades) => {
     nouElement.html(dada.iframe);
     nouElement.find("iframe").removeAttr("style");
     if (dada.spotify) {
-      nouElement.addClass("player");
+      nouElement.find("iframe").addClass("player");
     }
     nouElement.appendTo(template.parent());
   });
