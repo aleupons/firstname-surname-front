@@ -219,7 +219,9 @@ $(".editOptions button").on("click", function () {
   const ruta = tipusVisible().ruta;
 
   target.removeClass("modificant");
-  target.off("submit");
+  if ($(this).attr("id") != "delete") {
+    target.off("submit");
+  }
   unFillForm();
 
   const titol = target.find(".titolForm");
