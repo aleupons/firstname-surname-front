@@ -1,5 +1,5 @@
-export const urlAPI = "http://localhost:5000/";
-// export const urlAPI = "https://firstname-surname-back.onrender.com/";
+// export const urlAPI = "http://localhost:5000/";
+export const urlAPI = "https://firstname-surname-back.onrender.com/";
 
 //Llistes
 export const loadInformacions = async () => {
