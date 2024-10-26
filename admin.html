@@ -1,17 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="visibility: hidden;">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <script type="text/javascript">
-    (() => {
+  <script type="module">
+    import { getMyUser } from "/js/data.js";
+    (async () => {
       const token = localStorage.getItem("token");
       if (token == null) {
         window.location.href = "/login";
         return;
       }
+
+      const resp = await getMyUser(token);
+      if (resp.error) {
+        window.location.href = "/login";
+        return
+      }
+
+      document.getElementsByTagName("html")[0].style.visibility = "visible";
     })();
   </script>
 
