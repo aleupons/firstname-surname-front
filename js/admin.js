@@ -301,7 +301,7 @@ const fillForm = async (target, ruta) => {
 
   switch (target.attr("id")) {
     case "infoForm":
-      target.find("#nomIdioma").val(data.lang);
+      target.find("#nomIdioma").val(data.language);
       target.find("#idioma").val(data.lang);
       target.find("#benvinguda").val(data.welcome);
       target.find("#section1").val(data.section1);
