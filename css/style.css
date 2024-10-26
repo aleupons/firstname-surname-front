@@ -187,6 +187,22 @@ li.nav-item:not(.active) .titol:not(:hover) {
   margin: 0;
 }
 
+.carregant {
+  text-align: center;
+}
+
+.carregantDades {
+  display: none;
+}
+
+.spinner-border {
+  color: var(--color-secundari);
+}
+
+.spinner-border.admin {
+  color: var(--color-alternatiu);
+}
+
 @media only screen and (min-width: 576px) {
   h1 {
     font-size: 4.2rem;

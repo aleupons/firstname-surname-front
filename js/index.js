@@ -3,14 +3,27 @@ import { dataNotFound } from "/js/alerts.js";
 
 /* Idiomes */
 const changeLanguage = async (lang, generarBotons) => {
+  $(".info .carregant").removeClass("d-none");
   if (!lang) {
     lang == "ca";
   }
-  localStorage.setItem("language", lang);
   const informacions = await loadInformacions();
 
+  if (informacions && !informacions.filter((informacio) => informacio.lang == lang).length) {
+    lang == informacions[0] ? informacions[0].lang : "";
+  }
+  if (!informacions || !lang) {
+    dataNotFound("#welcome-text");
+    $(".info .carregant").addClass("d-none");
+    $(".navOcult").each(function () {
+      $(this).css("visibility", "initial");
+    });
+    return;
+  }
+  localStorage.setItem("language", lang);
+
   const welcomeText = document.getElementById('welcome-text');
-  const title = document.querySelector('#main h1');
+  // const title = document.querySelector('#main h1');
   const title2 = document.getElementById('title-2');
   const title3 = document.getElementById('title-3');
   const title4 = document.getElementById('title-4');
@@ -18,10 +31,6 @@ const changeLanguage = async (lang, generarBotons) => {
   const secondNavLink = document.getElementById('second-nav-link');
   const thirdNavLink = document.getElementById('third-nav-link');
   const lastNavLink = document.getElementById('last-nav-link');
-
-  if (!informacions || !informacions.filter((informacio) => informacio.lang == lang).length) {
-    return;
-  }
 
   $(".idiomes button:not(.langTemplate)").each(function () {
     $(this).remove();
@@ -46,14 +55,14 @@ const changeLanguage = async (lang, generarBotons) => {
   const texts = informacions.filter((informacio) => informacio.lang == lang)[0];
 
   welcomeText.textContent = texts.welcome;
-  title.innerHTML = texts.title.toUpperCase();
+  // title.innerHTML = texts.title.toUpperCase();
   title2.textContent = texts.title2.toUpperCase();
   title3.textContent = texts.title3.toUpperCase();
   title4.textContent = texts.title4.toUpperCase();
   firstNavLink.textContent = texts.title2.toUpperCase();
   secondNavLink.textContent = texts.title3.toUpperCase();
   thirdNavLink.textContent = texts.title4.toUpperCase();
-  lastNavLink.innerHTML = texts.title.toUpperCase();
+  // lastNavLink.innerHTML = texts.title.toUpperCase();
   firstNavLink.setAttribute("title", texts.title2);
   secondNavLink.setAttribute("title", texts.title3.replaceAll("<br>", " "));
   thirdNavLink.setAttribute("title", texts.title4);
@@ -176,8 +185,11 @@ window.addEventListener("resize", () => {
 
 /* Dades */
 const setCustomCarousel = (carouselId, dades) => {
+  $(`#${carouselId}`).removeClass("carregantDades");
+  $(`#${carouselId}`).prevAll(".carregant:first").addClass("d-none");
   if (!dades) {
     dataNotFound(`#${carouselId}`);
+    $();
     return;
   }
   const template = $(`#${carouselId} .carousel-inner .carousel-item`);
@@ -206,6 +218,8 @@ const setCustomCarousel = (carouselId, dades) => {
 };
 
 const setCarousel = (carouselId, dades) => {
+  $(`#${carouselId}`).removeClass("carregantDades");
+  $(`#${carouselId}`).prevAll(".carregant:first").addClass("d-none");
   if (!dades) {
     dataNotFound(`#${carouselId}`);
     return;

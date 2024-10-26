@@ -14,6 +14,7 @@ $(document).ready(async function() {
 const llistaInformacions = async () => {
   deseleccionarElements();
   const informacions = await loadInformacions();
+  $(".adminList").prevAll(".carregant:first").addClass("d-none");
   if (!informacions) {
     dataNotFound(".contingut");
     return;
@@ -62,6 +63,7 @@ const llistaDibuixosPinturesPoemes = async (tipus) => {
     switch (tipus) {
       case "dibuixos":
         elements = await loadDibuixos();
+        $(".adminList").prevAll(".carregant:first").addClass("d-none");
         if (!elements) {
           dataNotFound(".adminList");
           return;
@@ -70,6 +72,7 @@ const llistaDibuixosPinturesPoemes = async (tipus) => {
         break;
       case "pintures":
         elements = await loadPintures();
+        $(".adminList").prevAll(".carregant:first").addClass("d-none");
         if (!elements) {
           dataNotFound(".adminList");
           return;
@@ -78,6 +81,7 @@ const llistaDibuixosPinturesPoemes = async (tipus) => {
         break;
       case "poemes":
         elements = await loadPoemes();
+        $(".adminList").prevAll(".carregant:first").addClass("d-none");
         if (!elements) {
           dataNotFound(".adminList");
           return;
@@ -117,6 +121,7 @@ const afegirDibuixPinturaPoema = (element, tipus, singular, replace) => {
 };
 
 $(".adminOptions ul button").on("click", async function () {
+  $(".adminList .carregant").removeClass("d-none");
   $(".editOptions").removeClass("d-none");
   $("section.usuari").addClass("d-none");
 

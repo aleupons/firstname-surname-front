@@ -4,9 +4,7 @@ export const urlAPI = "https://firstname-surname-back.onrender.com/";
 //Llistes
 export const loadInformacions = async () => {
   try {
-    const resp = await fetch(`${urlAPI}informacions/list`, {
-      signal: AbortSignal.timeout(5000)
-    });
+    const resp = await fetch(`${urlAPI}informacions/list`);
     if (!resp.ok) {
       return false;
     }
@@ -18,9 +16,7 @@ export const loadInformacions = async () => {
 
 export const loadDibuixos = async () => {
   try {
-    const resp = await fetch(`${urlAPI}dibuixos/list`, {
-      signal: AbortSignal.timeout(5000)
-    });
+    const resp = await fetch(`${urlAPI}dibuixos/list`);
     if (!resp.ok) {
       return false;
     }
@@ -32,9 +28,7 @@ export const loadDibuixos = async () => {
 
 export const loadPintures = async () => {
   try {
-    const resp = await fetch(`${urlAPI}pintures/list`, {
-      signal: AbortSignal.timeout(5000)
-    });
+    const resp = await fetch(`${urlAPI}pintures/list`);
     if (!resp.ok) {
       return false;
     }
@@ -46,9 +40,7 @@ export const loadPintures = async () => {
 
 export const loadPoemes = async () => {
   try {
-    const resp = await fetch(`${urlAPI}poemes/list`, {
-      signal: AbortSignal.timeout(5000)
-    });
+    const resp = await fetch(`${urlAPI}poemes/list`);
     if (!resp.ok) {
       return false;
     }
