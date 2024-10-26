@@ -433,6 +433,7 @@ const crudElement = async (accio, target, ruta) => {
         seleccionarElement();
         pagination(tipus);
         elementModificat.click();
+        $("#modify").addClass("lastClicked");
       }
       break;
     case "delete":
