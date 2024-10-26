@@ -3,15 +3,14 @@ import { dataNotFound } from "/js/alerts.js";
 
 /* Idiomes */
 const changeLanguage = async (lang, generarBotons) => {
-  $(".info .carregant").removeClass("d-none");
   if (!lang) {
-    lang == "ca";
+    lang = "ca";
   }
   const informacions = await loadInformacions();
   $(".info .carregant").addClass("d-none");
 
   if (informacions && !informacions.filter((informacio) => informacio.lang == lang).length) {
-    lang == informacions[0] ? informacions[0].lang : "";
+    lang = informacions[0] ? informacions[0].lang : "";
   }
   if (!informacions || !lang) {
     dataNotFound("#welcome-text");
@@ -20,7 +19,6 @@ const changeLanguage = async (lang, generarBotons) => {
     });
     return;
   }
-  localStorage.setItem("language", lang);
 
   const welcomeText = document.getElementById('welcome-text');
   const section1 = document.getElementById('title-section1');
@@ -52,6 +50,7 @@ const changeLanguage = async (lang, generarBotons) => {
   }
 
   const texts = informacions.filter((informacio) => informacio.lang == lang)[0];
+  localStorage.setItem("language", lang);
 
   welcomeText.textContent = texts.welcome;
   section1.textContent = texts.section1.toUpperCase();

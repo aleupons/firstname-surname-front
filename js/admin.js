@@ -120,7 +120,7 @@ const afegirDibuixPinturaPoema = (element, tipus, singular, replace) => {
   return nouElement;
 };
 
-$(".adminOptions ul button").on("click", async function () {
+$(".adminOptions ul button:not(#home)").on("click", async function () {
   $(".adminList .carregant").removeClass("d-none");
   $(".editOptions").removeClass("d-none");
   $("section.usuari").addClass("d-none");
