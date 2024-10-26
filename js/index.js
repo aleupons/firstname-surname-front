@@ -8,13 +8,13 @@ const changeLanguage = async (lang, generarBotons) => {
     lang == "ca";
   }
   const informacions = await loadInformacions();
+  $(".info .carregant").addClass("d-none");
 
   if (informacions && !informacions.filter((informacio) => informacio.lang == lang).length) {
     lang == informacions[0] ? informacions[0].lang : "";
   }
   if (!informacions || !lang) {
     dataNotFound("#welcome-text");
-    $(".info .carregant").addClass("d-none");
     $(".navOcult").each(function () {
       $(this).css("visibility", "initial");
     });

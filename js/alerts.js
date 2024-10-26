@@ -19,39 +19,33 @@ export const dataNotFound = (selectorElement, info) => {
 };
 
 export const errorPeticio = (selectorElement, missatge) => {
-  const alerta = $(`
-    <div class="alert alert-danger d-flex align-items-center justify-content-center mt-4" id="errAlert">
-      <p class="text text-danger">${missatge}</p>
-    </div>
-  `);
-  if ($("#errAlert").length) {
-    $("#errAlert .text").text(missatge);
-    setTimeout(() => alerta.remove(), 3500);
+  let alerta = $("#errAlert");
+  if (alerta.length) {
+    clearTimeout(window['timer_' + "errAlert"]);
+    alerta.find(".text").text(missatge);
   } else {
+    alerta = $(`
+      <div class="alert alert-danger d-flex align-items-center justify-content-center mt-4" id="errAlert">
+        <p class="text text-danger">${missatge}</p>
+      </div>
+    `);
     $(selectorElement).append(alerta);
-    setTimeout(() => alerta.remove(), 3500);
   }
-  const capsalera = $(".adminOptions");
-  $('html, body').animate({
-    scrollTop: $("#errAlert").offset().top - capsalera.height() + 'px'
-  });
+  window['timer_' + "errAlert"] = setTimeout(() => alerta.remove(), 3500);
 };
 
 export const okPeticio = (selectorElement, missatge) => {
-  const alerta = $(`
-    <div class="alert alert-success d-flex align-items-center justify-content-center mt-4" id="okAlert">
-      <p class="text text-success">${missatge}</p>
-    </div>
-  `);
-  if ($("#okAlert").length) {
-    $("#okAlert .text").text(missatge);
-    setTimeout(() => alerta.remove(), 3500);
+  let alerta = $("#okAlert");
+  if (alerta.length) {
+    clearTimeout(window['timer_' + "okAlert"]);
+    alerta.find(".text").text(missatge);
   } else {
+    alerta = $(`
+      <div class="alert alert-success d-flex align-items-center justify-content-center mt-4" id="okAlert">
+        <p class="text text-success">${missatge}</p>
+      </div>
+    `);
     $(selectorElement).append(alerta);
-    setTimeout(() => alerta.remove(), 3500);
   }
-  const capsalera = $(".adminOptions");
-  $('html, body').animate({
-    scrollTop: $("#okAlert").offset().top - capsalera.height() + 'px'
-  });
+  window['timer_' + "okAlert"] = setTimeout(() => alerta.remove(), 3500);
 };

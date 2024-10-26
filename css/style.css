@@ -183,6 +183,14 @@ li.nav-item:not(.active) .titol:not(:hover) {
   margin-bottom: 2rem;
 }
 
+.alert {
+  position: fixed;
+  bottom: 0;
+  text-wrap: nowrap;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 .alert p.text {
   margin: 0;
 }
@@ -371,12 +379,6 @@ footer {
 /*  */
 
 /* Buttons */
-.btnTornar {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-}
-
 .botoMenu,
 .botoForm,
 .botoPag {

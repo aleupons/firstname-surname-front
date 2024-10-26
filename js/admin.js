@@ -403,9 +403,9 @@ const crudElement = async (accio, target, ruta) => {
     case "add":
       const respAdd = await newElement(tipus != "informacions", formData, token, `${ruta.substring(0, ruta.indexOf("/") + 1)}new-${ruta.substr(ruta.indexOf("/") + 1)}`);
       if (respAdd.error) {
-        errorPeticio(".adminList", respAdd.message);
+        errorPeticio(".adminItem", respAdd.message);
       } else {
-        okPeticio(".adminList", `${text} ${gen == "M" ? "afegit" : "afegida"}`);
+        okPeticio(".adminItem", `${text} ${gen == "M" ? "afegit" : "afegida"}`);
         const elementAfegit = tipus == "informacions" ? afegirInformacio(respAdd) : afegirDibuixPinturaPoema(respAdd, tipus, text);
         seleccionarElement();
         pagination(tipus);
@@ -426,9 +426,9 @@ const crudElement = async (accio, target, ruta) => {
       }
       const respMod = await modifyElement(tipus != "informacions" && foto, formData, id, token, !foto ? `${ruta}-no-image` : ruta);
       if (respMod.error) {
-        errorPeticio(".adminList", respMod.message);
+        errorPeticio(".adminItem", respMod.message);
       } else {
-        okPeticio(".adminList", `${text} ${gen == "M" ? "modificat" : "modificada"}`);
+        okPeticio(".adminItem", `${text} ${gen == "M" ? "modificat" : "modificada"}`);
         const elementModificat = tipus == "informacions" ? afegirInformacio(respMod, true) : afegirDibuixPinturaPoema(respMod, tipus, text, true);
         const elementAntic = $(`li.element[id="${id}"]`);
         elementAntic.replaceWith(elementModificat.attr("id", elementAntic.attr("id")));
