@@ -20,20 +20,38 @@ export const dataNotFound = (selectorElement, info) => {
 
 export const errorPeticio = (selectorElement, missatge) => {
   const alerta = $(`
-    <div class="alert alert-danger d-flex align-items-center justify-content-center mt-4">
+    <div class="alert alert-danger d-flex align-items-center justify-content-center mt-4" id="errAlert">
       <p class="text text-danger">${missatge}</p>
     </div>
   `);
-  $(selectorElement).append(alerta);
-  setTimeout(() => alerta.remove(), 3500);
+  if ($("#errAlert").length) {
+    $("#errAlert .text").text(missatge);
+    setTimeout(() => alerta.remove(), 3500);
+  } else {
+    $(selectorElement).append(alerta);
+    setTimeout(() => alerta.remove(), 3500);
+  }
+  const capsalera = $(".adminOptions");
+  $('html, body').animate({
+    scrollTop: $("#errAlert").offset().top - capsalera.height() + 'px'
+  });
 };
 
 export const okPeticio = (selectorElement, missatge) => {
   const alerta = $(`
-    <div class="alert alert-success d-flex align-items-center justify-content-center mt-4">
+    <div class="alert alert-success d-flex align-items-center justify-content-center mt-4" id="okAlert">
       <p class="text text-success">${missatge}</p>
     </div>
   `);
-  $(selectorElement).append(alerta);
-  setTimeout(() => alerta.remove(), 3500);
+  if ($("#okAlert").length) {
+    $("#okAlert .text").text(missatge);
+    setTimeout(() => alerta.remove(), 3500);
+  } else {
+    $(selectorElement).append(alerta);
+    setTimeout(() => alerta.remove(), 3500);
+  }
+  const capsalera = $(".adminOptions");
+  $('html, body').animate({
+    scrollTop: $("#okAlert").offset().top - capsalera.height() + 'px'
+  });
 };
