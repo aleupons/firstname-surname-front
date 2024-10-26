@@ -23,10 +23,9 @@ const changeLanguage = async (lang, generarBotons) => {
   localStorage.setItem("language", lang);
 
   const welcomeText = document.getElementById('welcome-text');
-  // const title = document.querySelector('#main h1');
-  const title2 = document.getElementById('title-2');
-  const title3 = document.getElementById('title-3');
-  const title4 = document.getElementById('title-4');
+  const section1 = document.getElementById('title-section1');
+  const section2 = document.getElementById('title-section2');
+  const section3 = document.getElementById('title-section3');
   const firstNavLink = document.getElementById('first-nav-link');
   const secondNavLink = document.getElementById('second-nav-link');
   const thirdNavLink = document.getElementById('third-nav-link');
@@ -55,22 +54,20 @@ const changeLanguage = async (lang, generarBotons) => {
   const texts = informacions.filter((informacio) => informacio.lang == lang)[0];
 
   welcomeText.textContent = texts.welcome;
-  // title.innerHTML = texts.title.toUpperCase();
-  title2.textContent = texts.title2.toUpperCase();
-  title3.textContent = texts.title3.toUpperCase();
-  title4.textContent = texts.title4.toUpperCase();
-  firstNavLink.textContent = texts.title2.toUpperCase();
-  secondNavLink.textContent = texts.title3.toUpperCase();
-  thirdNavLink.textContent = texts.title4.toUpperCase();
-  // lastNavLink.innerHTML = texts.title.toUpperCase();
-  firstNavLink.setAttribute("title", texts.title2);
-  secondNavLink.setAttribute("title", texts.title3.replaceAll("<br>", " "));
-  thirdNavLink.setAttribute("title", texts.title4);
-  lastNavLink.setAttribute("title", texts.title5);
-  firstNavLink.setAttribute("alt", texts.title2);
-  secondNavLink.setAttribute("alt", texts.title3.replaceAll("<br>", " "));
-  thirdNavLink.setAttribute("alt", texts.title4);
-  lastNavLink.setAttribute("alt", texts.title5);
+  section1.textContent = texts.section1.toUpperCase();
+  section2.textContent = texts.section2.toUpperCase();
+  section3.textContent = texts.section3.toUpperCase();
+  firstNavLink.textContent = texts.section1.toUpperCase();
+  secondNavLink.textContent = texts.section2.toUpperCase();
+  thirdNavLink.textContent = texts.section3.toUpperCase();
+  firstNavLink.setAttribute("title", texts.section1);
+  secondNavLink.setAttribute("title", texts.section2);
+  thirdNavLink.setAttribute("title", texts.section3);
+  lastNavLink.setAttribute("title", texts.home);
+  firstNavLink.setAttribute("alt", texts.section1);
+  secondNavLink.setAttribute("alt", texts.section2);
+  thirdNavLink.setAttribute("alt", texts.section3);
+  lastNavLink.setAttribute("alt", texts.home);
 
   $(".idiomes .botoMenu").each(function () {
     $(this).removeClass("clicked");

@@ -37,10 +37,10 @@ const afegirInformacio = (informacio, replace) => {
   const template = $(".informacions .llistaElements #templateInformacio");
   const novaInformacio = template.clone().removeClass("d-none");
   novaInformacio.attr("id", informacio._id);
-  novaInformacio.find(".nomElement").text(informacio.lang);
+  novaInformacio.find(".nomElement").text(informacio.language);
   const templateProp = novaInformacio.find(".templatePropietat");
   for (const propietat in informacio) {
-      if (propietat != "_id" && propietat != "lang") {
+      if (propietat != "_id" && propietat != "language") {
         const novaPropietat = templateProp.clone();
         novaPropietat.find(".propietat").text(propietat);
         novaPropietat.find(".valor").text(informacio[propietat]);
@@ -304,11 +304,10 @@ const fillForm = async (target, ruta) => {
       target.find("#nomIdioma").val(data.lang);
       target.find("#idioma").val(data.lang);
       target.find("#benvinguda").val(data.welcome);
-      target.find("#titol").val(data.title);
-      target.find("#titol2").val(data.title2);
-      target.find("#titol3").val(data.title3);
-      target.find("#titol4").val(data.title4);
-      target.find("#titol5").val(data.title5);
+      target.find("#section1").val(data.section1);
+      target.find("#section2").val(data.section2);
+      target.find("#section3").val(data.section3);
+      target.find("#sectionHome").val(data.home);
       break;
     case "dibuixForm":
       target.find("#fotoDibuix").removeAttr("required");
@@ -343,11 +342,10 @@ const crudElement = async (accio, target, ruta) => {
         language: target.find("#nomIdioma").val(),
         lang: target.find("#idioma").val(),
         welcome: target.find("#benvinguda").val(),
-        title: target.find("#titol").val(),
-        title2: target.find("#titol2").val(),
-        title3: target.find("#titol3").val(),
-        title4: target.find("#titol4").val(),
-        title5: target.find("#titol5").val(),
+        section1: target.find("#section1").val(),
+        section2: target.find("#section2").val(),
+        section3: target.find("#section3").val(),
+        home: target.find("#sectionHome").val(),
       };
       text = "Informació";
       gen = "F";
