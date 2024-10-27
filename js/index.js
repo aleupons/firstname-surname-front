@@ -301,7 +301,6 @@ const updateActiveSection = () => {
 
   navLi.forEach((li) => {
     li.classList.remove("active");
-    alert(li.classList + "/n");
     if (li.classList.contains(activeSection)) {
       li.classList.add("active");
     }
