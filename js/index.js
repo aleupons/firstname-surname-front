@@ -308,6 +308,7 @@ const updateActiveSection = () => {
 };
 
 window.addEventListener("scroll", updateActiveSection);
+$(document.body).on("touchmove", updateActiveSection); //Mòbil
 window.addEventListener("resize", updateActiveSection);
 
 const menuLateral = $(".menuLateral");
