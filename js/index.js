@@ -301,7 +301,7 @@ const updateActiveSection = () => {
 
   navLi.forEach((li) => {
     li.classList.remove("active");
-    $(li).blur();
+    $(li).find("a").blur();
     if (li.classList.contains(activeSection)) {
       li.classList.add("active");
     }
