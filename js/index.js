@@ -304,10 +304,6 @@ const updateActiveSection = () => {
     if (li.classList.contains(activeSection)) {
       li.classList.add("active");
     }
-    li.addEventListener("click", () => {
-      navLi.forEach((item) => item.classList.remove("active"));
-      li.classList.add("active");
-    });
   });
 };
 
