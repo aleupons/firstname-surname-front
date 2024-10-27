@@ -284,6 +284,9 @@ const setCarousel = (carouselId, dades) => {
 /* Menu */
 responsiveMenu();
 
+$(".navbar-nav.nav li a").off("click");
+$(".navbar-nav.nav li").off("click");
+
 const updateActiveSection = () => {
   const sections = document.querySelectorAll("section");
   const navLi = document.querySelectorAll(".navbar-nav.nav li");
