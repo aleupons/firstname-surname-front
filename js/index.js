@@ -285,32 +285,42 @@ const setCarousel = (carouselId, dades) => {
 responsiveMenu();
 
 const updateActiveSection = () => {
-  setTimeout(() => {
-    const sections = document.querySelectorAll("section");
-    const navLi = document.querySelectorAll(".navbar-nav.nav li");
-    let maxVisibleArea = 0;
-    let activeSection = null;
+  const sections = document.querySelectorAll("section");
+  const navLi = document.querySelectorAll(".navbar-nav.nav li");
+  let maxVisibleArea = 0;
+  let activeSection = null;
 
-    sections.forEach((section) => {
-      const visibleArea = getVisibleArea(section);
+  sections.forEach((section) => {
+    const visibleArea = getVisibleArea(section);
 
-      if (visibleArea > maxVisibleArea) {
-        maxVisibleArea = visibleArea;
-        activeSection = section.getAttribute("id");
-      }
+    if (visibleArea > maxVisibleArea) {
+      maxVisibleArea = visibleArea;
+      activeSection = section.getAttribute("id");
+    }
+  });
+
+  navLi.forEach((li) => {
+    li.classList.remove("active");
+    if (li.classList.contains(activeSection)) {
+      li.classList.add("active");
+    }
+    li.addEventListener("click", () => {
+      navLi.forEach((item) => item.classList.remove("active"));
+      li.classList.add("active");
     });
-
-    navLi.forEach((li) => {
-      li.classList.remove("active");
-      if (li.classList.contains(activeSection)) {
-        li.classList.add("active");
-      }
-    });
-  }, 100);
+  });
 };
 
-window.addEventListener("scroll", updateActiveSection);
-window.addEventListener("resize", updateActiveSection);
+const debounce = (func, delay) => {
+  let timeout;
+  return (...args) => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func.apply(this, args), delay);
+  };
+};
+
+window.addEventListener("scroll", debounce(updateActiveSection, 100));
+window.addEventListener("resize", debounce(updateActiveSection, 100));
 
 const menuLateral = $(".menuLateral");
 $('#menu').on('show.bs.collapse', () => {
