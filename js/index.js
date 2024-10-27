@@ -284,15 +284,6 @@ const setCarousel = (carouselId, dades) => {
 /* Menu */
 responsiveMenu();
 
-$(".navbar-nav.nav li a").off("click");
-$(".navbar-nav.nav li a").on("click", function (e) {
-  e.preventDefault();
-  $(".navbar-nav.nav li").each(function () {
-    $(this).removeClass("active");
-  });
-  $(this).parent("li").addClass("active");
-});
-
 const updateActiveSection = () => {
   const sections = document.querySelectorAll("section");
   const navLi = document.querySelectorAll(".navbar-nav.nav li");
@@ -310,6 +301,7 @@ const updateActiveSection = () => {
 
   navLi.forEach((li) => {
     li.classList.remove("active");
+    alert(li.classList + "/n");
     if (li.classList.contains(activeSection)) {
       li.classList.add("active");
     }
