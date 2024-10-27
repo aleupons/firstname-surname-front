@@ -2,11 +2,10 @@ import { loadInformacions, loadCansons, loadDibuixos, loadPintures, loadPoemes }
 import { dataNotFound } from "/js/alerts.js";
 
 /* Idiomes */
-const changeLanguage = async (lang, generarBotons) => {
+const changeLanguage = (informacions, lang, generarBotons) => {
   if (!lang) {
     lang = "ca";
   }
-  const informacions = await loadInformacions();
   $(".info .carregant").addClass("d-none");
 
   if (informacions && !informacions.filter((informacio) => informacio.lang == lang).length) {
@@ -20,6 +19,11 @@ const changeLanguage = async (lang, generarBotons) => {
     return;
   }
 
+  localStorage.setItem("webData", JSON.stringify(informacions));
+  setTextos(informacions, lang, generarBotons);
+};
+
+const setTextos = (informacions, lang, generarBotons) => {
   const welcomeText = document.getElementById('welcome-text');
   const section1 = document.getElementById('title-section1');
   const section2 = document.getElementById('title-section2');
@@ -43,7 +47,7 @@ const changeLanguage = async (lang, generarBotons) => {
       nouIdioma.attr("alt", informacio.language);
       nouIdioma.text(informacio.lang.toUpperCase());
       nouIdioma.on("click", async (e) => {
-        await changeLanguage($(e.currentTarget).data("language"), false);
+        changeLanguage(await loadInformacions(), $(e.currentTarget).data("language"), false);
       });
       $(".idiomes .btn-group").append(nouIdioma);
     });
@@ -94,6 +98,12 @@ const responsiveMenu = () => {
     menuLateral.css("max-width", menuLateral.parent().width());
   } else {
     menuLateral.css("min-width", menuLateral.parent().width());
+  }
+
+  const botoMenu = menuLateral.find("button.navbar-toggler");
+  if ((botoMenu.hasClass("collapsed") && !window.matchMedia("(min-width: 576px)").matches)
+    || (!botoMenu.hasClass("collapsed") && window.matchMedia("(min-width: 576px)").matches)) {
+      botoMenu.click();
   }
 };
 /* */
@@ -271,9 +281,72 @@ const setCarousel = (carouselId, dades) => {
 };
 /* */
 
+/* Menu */
+responsiveMenu();
+const sections = document.querySelectorAll("section");
+const navLi = document.querySelectorAll(".navbar-nav.nav li");
+
+const updateActiveSection = () => {
+  let maxVisibleArea = 0;
+  let activeSection = null;
+
+  sections.forEach((section) => {
+    const visibleArea = getVisibleArea(section);
+
+    if (visibleArea > maxVisibleArea) {
+      maxVisibleArea = visibleArea;
+      activeSection = section.getAttribute("id");
+    }
+  });
+
+  navLi.forEach((li) => {
+    li.classList.remove("active");
+    if (li.classList.contains(activeSection)) {
+      li.classList.add("active");
+    }
+  });
+};
+
+window.addEventListener("scroll", updateActiveSection);
+window.addEventListener("resize", updateActiveSection);
+
+const menuLateral = $(".menuLateral");
+$('#menu').on('show.bs.collapse', () => {
+  menuLateral.css("box-shadow", `2px 6px 8px 2px rgba(112, 108, 97, 0.5)`);
+});
+
+$('#menu').on('hide.bs.collapse', () => {
+  menuLateral.css("box-shadow", "none");
+});
+/* */
+
+/* Links */
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    e.preventDefault();
+    document.querySelector(this.getAttribute('href')).scrollIntoView({
+      behavior: 'smooth'
+    });
+  });
+});
+
+$(".social-links button").on("click", (e) => {
+  const link = $(e.currentTarget).data("link");
+  open(link, link.startsWith("mailto:") ? "_self" : "_blank");
+});
+/* */
+
 $(document).ready(async function() {
   /* Idiomes */
-  await changeLanguage(localStorage.getItem("language") ?? navigator.language, true);
+  const webData = JSON.parse(localStorage.getItem("webData"));
+  const idioma = localStorage.getItem("language") ?? navigator.language;
+  let recarregarDades = false;
+  if (webData) {
+    changeLanguage(webData, idioma, true);
+    recarregarDades = true;
+  } else {
+    changeLanguage(await loadInformacions(), idioma, true);
+  }
   /* */
 
   /* Dades */
@@ -283,61 +356,6 @@ $(document).ready(async function() {
   setCarousel("carouselPoemes", await loadPoemes());
   /* */
 
-  /* Links */
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-      e.preventDefault();
-      document.querySelector(this.getAttribute('href')).scrollIntoView({
-        behavior: 'smooth'
-      });
-    });
-  });
-
-  $(".social-links button").on("click", (e) => {
-    const link = $(e.currentTarget).data("link");
-    open(link, link.startsWith("mailto:") ? "_self" : "_blank");
-  });
-  /* */
-
-  /* Menu */
-  responsiveMenu();
-  const sections = document.querySelectorAll("section");
-  const navLi = document.querySelectorAll(".navbar-nav.nav li");
-
-  const updateActiveSection = () => {
-    let maxVisibleArea = 0;
-    let activeSection = null;
-
-    sections.forEach((section) => {
-      const visibleArea = getVisibleArea(section);
-
-      if (visibleArea > maxVisibleArea) {
-        maxVisibleArea = visibleArea;
-        activeSection = section.getAttribute("id");
-      }
-    });
-
-    navLi.forEach((li) => {
-      li.classList.remove("active");
-      if (li.classList.contains(activeSection)) {
-        li.classList.add("active");
-      }
-    });
-  };
-
-  window.addEventListener("scroll", updateActiveSection);
-  window.addEventListener("resize", updateActiveSection);
-
-  const menuLateral = $(".menuLateral");
-  $('#menu').on('show.bs.collapse', () => {
-    menuLateral.css("box-shadow", `2px 6px 8px 2px rgba(112, 108, 97, 0.5)`);
-  });
-
-  $('#menu').on('hide.bs.collapse', () => {
-    menuLateral.css("box-shadow", "none");
-  });
-  /* */
-
   /* Carousel */
   responsiveCarousel("carouselDibuixos");
   responsiveCarousel("carouselPintures");
@@ -345,4 +363,8 @@ $(document).ready(async function() {
   autoCarousel("carouselPintures", 3500);
   obrirImatge();
   /* */
+
+  if (recarregarDades) {
+    changeLanguage(await loadInformacions(), idioma);
+  }
 });

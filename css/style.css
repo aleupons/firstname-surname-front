@@ -55,7 +55,7 @@ body {
   margin-block: 1rem;
   position: sticky;
   top: 0;
-  bottom: 50px;
+  bottom: 190px;
   display: inline-flex;
   justify-content: center;
   background-color: var(--color-secundari);
@@ -64,7 +64,7 @@ body {
 }
 
   .idiomes button {
-    font-size: 0.7rem;
+    font-size: 0.9rem;
   }
 
 .social-links,
@@ -87,7 +87,7 @@ body {
   }
 
   .idiomes button {
-    font-size: 1rem;
+    font-size: 0.8rem;
   }
 
   .social-links {
@@ -523,6 +523,14 @@ footer {
 /* */
 
 /* Administració */
+.navbar-toggler {
+  border: 0;
+}
+
+.navbar-toggler:focus {
+  box-shadow: none;
+}
+
 .adminOptions {
   position: sticky;
   top: 0;
@@ -560,6 +568,22 @@ section.adminItem {
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr));
   }
 
+  section.adminList div:not(.informacions):not(.cansons) .llistaElements {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 7rem), 1fr));
+  }
+
+.element.poema .nomElement{
+  font-size: 0.8rem;
+}
+
+.element.poema .descripcioElement{
+  font-size: 0.9rem;
+}
+
+.element:not(.poema) .descripcioElement {
+  display: none;
+}
+
 .element {
   background-color: var(--color-secundari);
   opacity: 0.8;
@@ -582,7 +606,7 @@ section.adminItem {
   }
 
   .element .nomElement {
-    font-size: 1.2rem;
+    font-size: 1rem;
   }
 
   .element img {
