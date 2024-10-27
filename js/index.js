@@ -315,8 +315,8 @@ const debounce = (func, delay) => {
   };
 };
 
-window.addEventListener("scroll", debounce(updateActiveSection, 100));
-window.addEventListener("resize", debounce(updateActiveSection, 100));
+window.addEventListener("scroll", debounce(updateActiveSection, 50));
+window.addEventListener("resize", debounce(updateActiveSection, 50));
 
 const menuLateral = $(".menuLateral");
 $('#menu').on('show.bs.collapse', () => {
@@ -345,6 +345,8 @@ $(".social-links button").on("click", (e) => {
 /* */
 
 $(document).ready(async function() {
+  debounce(updateActiveSection, 50)
+
   /* Idiomes */
   const webData = JSON.parse(localStorage.getItem("webData"));
   const idioma = localStorage.getItem("language") ?? navigator.language;
