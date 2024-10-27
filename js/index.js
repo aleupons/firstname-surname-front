@@ -301,8 +301,12 @@ const updateActiveSection = () => {
 
   navLi.forEach((li) => {
     $(li).removeClass("active").find("a").blur();
+    $(li).find("a").removeClass("active");
+    $(li).find("a").removeAttr("aria-current");
     if (li.classList.contains(activeSection)) {
       li.classList.add("active");
+      $(li).find("a").addClass("active");
+      $(li).find("a").attr("aria-current", "page");
     }
   });
 };
