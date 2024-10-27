@@ -284,6 +284,7 @@ const setCarousel = (carouselId, dades) => {
 /* Menu */
 responsiveMenu();
 
+$(".navbar-nav.nav li a").off("click");
 $(".navbar-nav.nav li a").on("click", function (e) {
   e.preventDefault();
   $(".navbar-nav.nav li").each(function () {
