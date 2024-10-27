@@ -283,10 +283,10 @@ const setCarousel = (carouselId, dades) => {
 
 /* Menu */
 responsiveMenu();
-const sections = document.querySelectorAll("section");
-const navLi = document.querySelectorAll(".navbar-nav.nav li");
 
 const updateActiveSection = () => {
+  const sections = document.querySelectorAll("section");
+  const navLi = document.querySelectorAll(".navbar-nav.nav li");
   let maxVisibleArea = 0;
   let activeSection = null;
 
@@ -322,14 +322,14 @@ $('#menu').on('hide.bs.collapse', () => {
 /* */
 
 /* Links */
-// document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-//   anchor.addEventListener('click', function (e) {
-//     e.preventDefault();
-//     document.querySelector(this.getAttribute('href')).scrollIntoView({
-//       behavior: 'smooth'
-//     });
-//   });
-// });
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    e.preventDefault();
+    document.querySelector(this.getAttribute('href')).scrollIntoView({
+      behavior: 'smooth'
+    });
+  });
+});
 
 $(".social-links button").on("click", (e) => {
   const link = $(e.currentTarget).data("link");
