@@ -315,6 +315,9 @@ const debounce = (func, delay) => {
   };
 };
 
+window.addEventListener("scroll", debounce(updateActiveSection, 50));
+window.addEventListener("resize", debounce(updateActiveSection, 50));
+
 const menuLateral = $(".menuLateral");
 $('#menu').on('show.bs.collapse', () => {
   menuLateral.css("box-shadow", `2px 6px 8px 2px rgba(112, 108, 97, 0.5)`);
@@ -342,11 +345,6 @@ $(".social-links button").on("click", (e) => {
 /* */
 
 $(document).ready(async function() {
-  /* Menu */
-  window.addEventListener("scroll", debounce(updateActiveSection, 50));
-  window.addEventListener("resize", debounce(updateActiveSection, 50));
-  /* */
-
   /* Idiomes */
   const webData = JSON.parse(localStorage.getItem("webData"));
   const idioma = localStorage.getItem("language") ?? navigator.language;
