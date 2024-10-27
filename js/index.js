@@ -285,26 +285,28 @@ const setCarousel = (carouselId, dades) => {
 responsiveMenu();
 
 const updateActiveSection = () => {
-  const sections = document.querySelectorAll("section");
-  const navLi = document.querySelectorAll(".navbar-nav.nav li");
-  let maxVisibleArea = 0;
-  let activeSection = null;
+  setTimeout(() => {
+    const sections = document.querySelectorAll("section");
+    const navLi = document.querySelectorAll(".navbar-nav.nav li");
+    let maxVisibleArea = 0;
+    let activeSection = null;
 
-  sections.forEach((section) => {
-    const visibleArea = getVisibleArea(section);
+    sections.forEach((section) => {
+      const visibleArea = getVisibleArea(section);
 
-    if (visibleArea > maxVisibleArea) {
-      maxVisibleArea = visibleArea;
-      activeSection = section.getAttribute("id");
-    }
-  });
+      if (visibleArea > maxVisibleArea) {
+        maxVisibleArea = visibleArea;
+        activeSection = section.getAttribute("id");
+      }
+    });
 
-  navLi.forEach((li) => {
-    li.classList.remove("active");
-    if (li.classList.contains(activeSection)) {
-      li.classList.add("active");
-    }
-  });
+    navLi.forEach((li) => {
+      li.classList.remove("active");
+      if (li.classList.contains(activeSection)) {
+        li.classList.add("active");
+      }
+    });
+  }, 100);
 };
 
 window.addEventListener("scroll", updateActiveSection);
