@@ -284,6 +284,15 @@ const setCarousel = (carouselId, dades) => {
 /* Menu */
 responsiveMenu();
 
+const navItems = document.querySelectorAll('.navbar-nav.nav li');
+navItems.forEach((li) => {
+    li.addEventListener('click', function() {
+        navItems.forEach((item) => item.classList.remove('active'));
+        this.classList.add('active');
+        updateActiveSection();
+    });
+});
+
 const updateActiveSection = () => {
   const sections = document.querySelectorAll("section");
   const navLi = document.querySelectorAll(".navbar-nav.nav li");
