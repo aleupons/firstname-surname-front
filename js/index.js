@@ -284,15 +284,6 @@ const setCarousel = (carouselId, dades) => {
 /* Menu */
 responsiveMenu();
 
-const navItems = document.querySelectorAll('.navbar-nav.nav li');
-navItems.forEach((li) => {
-    li.addEventListener('click', function() {
-        navItems.forEach((item) => item.classList.remove('active'));
-        this.classList.add('active');
-        updateActiveSection();
-    });
-});
-
 const updateActiveSection = () => {
   const sections = document.querySelectorAll("section");
   const navLi = document.querySelectorAll(".navbar-nav.nav li");
@@ -324,9 +315,6 @@ const debounce = (func, delay) => {
   };
 };
 
-window.addEventListener("scroll", debounce(updateActiveSection, 50));
-window.addEventListener("resize", debounce(updateActiveSection, 50));
-
 const menuLateral = $(".menuLateral");
 $('#menu').on('show.bs.collapse', () => {
   menuLateral.css("box-shadow", `2px 6px 8px 2px rgba(112, 108, 97, 0.5)`);
@@ -354,6 +342,20 @@ $(".social-links button").on("click", (e) => {
 /* */
 
 $(document).ready(async function() {
+  /* Menu */
+  $( ".navbar-nav.nav li" ).bind( "click", function(event) {
+    event.preventDefault();
+    const clickedItem = $(this);
+    $( ".navbar-nav.nav li" ).each( function() {
+        $( this ).removeClass( "active" );
+    });
+    clickedItem.addClass( "active" );
+  });
+
+  window.addEventListener("scroll", debounce(updateActiveSection, 50));
+  window.addEventListener("resize", debounce(updateActiveSection, 50));
+  /* */
+
   /* Idiomes */
   const webData = JSON.parse(localStorage.getItem("webData"));
   const idioma = localStorage.getItem("language") ?? navigator.language;
