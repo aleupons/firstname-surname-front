@@ -145,7 +145,7 @@ body {
     color: var(--color-principal);
   }
 
-  .nav .link {
+  .nav .nav-link {
     text-align: center;
     line-height: 100%;
   }
