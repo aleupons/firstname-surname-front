@@ -345,8 +345,6 @@ $(".social-links button").on("click", (e) => {
 /* */
 
 $(document).ready(async function() {
-  debounce(updateActiveSection, 50)
-
   /* Idiomes */
   const webData = JSON.parse(localStorage.getItem("webData"));
   const idioma = localStorage.getItem("language") ?? navigator.language;
