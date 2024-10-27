@@ -15,7 +15,7 @@
       }
 
       const resp = await getMyUser(token);
-      if (resp.error) {
+      if (resp.error || !resp.idAdmin) {
         window.location.href = "/login";
         return
       }
