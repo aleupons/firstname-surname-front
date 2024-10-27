@@ -284,6 +284,14 @@ const setCarousel = (carouselId, dades) => {
 /* Menu */
 responsiveMenu();
 
+$(".navbar-nav.nav li a").on("click", function (e) {
+  e.preventDefault();
+  $(".navbar-nav.nav li").each(function () {
+    $(this).removeClass("active");
+  });
+  $(this).parent("li").addClass("active");
+});
+
 const updateActiveSection = () => {
   const sections = document.querySelectorAll("section");
   const navLi = document.querySelectorAll(".navbar-nav.nav li");
