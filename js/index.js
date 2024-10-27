@@ -343,15 +343,6 @@ $(".social-links button").on("click", (e) => {
 
 $(document).ready(async function() {
   /* Menu */
-  $( ".navbar-nav.nav li" ).bind( "click", function(event) {
-    event.preventDefault();
-    const clickedItem = $(this);
-    $( ".navbar-nav.nav li" ).each( function() {
-        $( this ).removeClass( "active" );
-    });
-    clickedItem.addClass( "active" );
-  });
-
   window.addEventListener("scroll", debounce(updateActiveSection, 50));
   window.addEventListener("resize", debounce(updateActiveSection, 50));
   /* */
