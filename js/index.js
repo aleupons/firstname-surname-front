@@ -284,8 +284,6 @@ const setCarousel = (carouselId, dades) => {
 /* Menu */
 responsiveMenu();
 
-$(".nav-link").off("click");
-
 const updateActiveSection = () => {
   const sections = document.querySelectorAll("section");
   const navLi = document.querySelectorAll(".navbar-nav.nav li");
@@ -303,6 +301,7 @@ const updateActiveSection = () => {
 
   navLi.forEach((li) => {
     li.classList.remove("active");
+    $(li).blur();
     if (li.classList.contains(activeSection)) {
       li.classList.add("active");
     }
