@@ -323,10 +323,13 @@ $(".nav-link").each(function () {
   const navlink = $(this);
   navlink.on("touchstart", (e) => {
     e.preventDefault();
-    window.location.href = navlink.attr("href");
+  });
+  navLink.on("touchend", (e) => {
+    e.preventDefault();
   });
   navlink.on("click", (e) => {
     e.preventDefault();
+    window.location.href = navlink.attr("href");
   });
 });
 
