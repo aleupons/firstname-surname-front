@@ -192,7 +192,7 @@ window.addEventListener("resize", () => {
 /* Dades */
 const setCansons = (containerSelector, dades) => {
   $(`#${containerSelector}`).removeClass("carregantDades");
-  $(`#${containerSelector}`).parent().prev(".carregant").addClass("d-none");
+  $(`#${containerSelector}`).closest("#section2-regular").prev(".carregant").addClass("d-none");
   if (!dades) {
     dataNotFound(`#${containerSelector}`);
     $(`#${containerSelector}`).addClass("d-none");
