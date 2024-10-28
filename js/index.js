@@ -307,12 +307,23 @@ const updateActiveSection = () => {
   });
 };
 
-window.addEventListener("scroll", updateActiveSection);
-window.addEventListener("resize", updateActiveSection);
+const debounce = (func, delay) => {
+  let timeout;
+  return (...args) => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func.apply(this, args), delay);
+  };
+};
+
+window.addEventListener("scroll", debounce(updateActiveSection, 100));
+window.addEventListener("resize", debounce(updateActiveSection, 100));
 
 //Evitar deixar actiu amb mòbils
 $(".nav-link").each(function () {
   $(this).on("touchstart", (e) => {
+    e.preventDefault();
+  });
+  $(this).on("touchend", (e) => {
     e.preventDefault();
     window.location.href = $(this).attr("href");
   });
