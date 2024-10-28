@@ -103,7 +103,7 @@ const responsiveMenu = () => {
   const botoMenu = menuLateral.find("button.navbar-toggler");
   if ((botoMenu.hasClass("collapsed") && !window.matchMedia("(min-width: 576px)").matches)
     || (!botoMenu.hasClass("collapsed") && window.matchMedia("(min-width: 576px)").matches)) {
-      botoMenu.click();
+      // botoMenu.click();
   }
 };
 /* */
@@ -326,14 +326,6 @@ $('#menu').on('show.bs.collapse', () => {
 $('#menu').on('hide.bs.collapse', () => {
   menuLateral.css("box-shadow", "none");
 });
-
-window.onload = function () {
-  $("li.nav-item").click(function () {
-    if ($(this).find("a.nav-link").attr("href") != "#") {
-      window.location.href = $(this).find("a").attr("href");
-    }
-  });
-}
 /* */
 
 /* Links */
