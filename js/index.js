@@ -314,7 +314,7 @@ window.addEventListener("resize", updateActiveSection);
 $(".nav-link").each(function () {
   $(this).on("touchstart", (e) => {
     e.preventDefault();
-    $(this).click();
+    window.location.href = $(this).attr("href");
   });
 });
 
