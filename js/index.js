@@ -324,7 +324,7 @@ $(".nav-link").each(function () {
   navlink.on("touchstart", (e) => {
     e.preventDefault();
   });
-  navLink.on("touchend", (e) => {
+  navlink.on("touchend", (e) => {
     e.preventDefault();
   });
   navlink.on("click", (e) => {
