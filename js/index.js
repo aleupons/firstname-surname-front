@@ -282,11 +282,6 @@ const setCarousel = (carouselId, dades) => {
 /* */
 
 /* Menu */
-$(".nav-item .nav-link").on("click", (e) => {
-  const link = $(e.currentTarget).data("href");
-  window.location.href = link;
-});
-
 responsiveMenu();
 
 const updateActiveSection = () => {
@@ -305,15 +300,23 @@ const updateActiveSection = () => {
   });
 
   navLi.forEach((li) => {
-    $(li).find(".nav-link").removeClass("active");
+    $(li).find("a").removeClass("active");
     if (li.classList.contains(activeSection)) {
-      $(li).find(".nav-link").addClass("active");
+      $(li).find("a").addClass("active");
     }
   });
 };
 
-window.addEventListener("scroll", updateActiveSection);
-window.addEventListener("resize", updateActiveSection);
+const debounce = (func, delay) => {
+  let timeout;
+  return (...args) => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func.apply(this, args), delay);
+  };
+};
+
+window.addEventListener("scroll", debounce(updateActiveSection, 50));
+window.addEventListener("resize", debounce(updateActiveSection, 50));
 
 const menuLateral = $(".menuLateral");
 $('#menu').on('show.bs.collapse', () => {
@@ -326,6 +329,15 @@ $('#menu').on('hide.bs.collapse', () => {
 /* */
 
 /* Links */
+document.querySelectorAll("a[href^='#']").forEach(anchor => {
+  anchor.addEventListener("click", function (e) {
+    e.preventDefault();
+    document.querySelector(this.getAttribute("href")).scrollIntoView({
+      behavior: "smooth"
+    });
+  });
+});
+
 $(".social-links button").on("click", (e) => {
   const link = $(e.currentTarget).data("link");
   open(link, link.startsWith("mailto:") ? "_self" : "_blank");
