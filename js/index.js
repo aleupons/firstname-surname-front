@@ -323,7 +323,7 @@ $(".nav-link").each(function () {
   const navlink = $(this);
   navlink.on("touchend", (e) => {
     e.preventDefault();
-    window.location.href = navlink.attr("href");
+    navlink.click();
   });
 });
 
