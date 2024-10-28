@@ -328,20 +328,20 @@ $('#menu').on('hide.bs.collapse', () => {
 });
 
 window.onload = function () {
-  $('.nav-item li').click(function () {
-    if ($(this).find('a').attr('href') != '#') {
-      window.location.href = $(this).find('a').attr('href');
+  $("li.nav-item").click(function () {
+    if ($(this).find("a.nav-link").attr("href") != "#") {
+      window.location.href = $(this).find("a").attr("href");
     }
   });
 }
 /* */
 
 /* Links */
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function (e) {
+document.querySelectorAll("a[href^='#']").forEach(anchor => {
+  anchor.addEventListener("click", function (e) {
     e.preventDefault();
-    document.querySelector(this.getAttribute('href')).scrollIntoView({
-      behavior: 'smooth'
+    document.querySelector(this.getAttribute("href")).scrollIntoView({
+      behavior: "smooth"
     });
   });
 });
