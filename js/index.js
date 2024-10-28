@@ -323,6 +323,9 @@ $(".nav-link").each(function () {
   $(this).on("touchstart", (e) => {
     $(this).removeClass("active");
   });
+  $(this).on("touchend", (e) => {
+    $(this).removeClass("active");
+  });
 });
 
 const menuLateral = $(".menuLateral");
