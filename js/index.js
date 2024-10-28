@@ -300,9 +300,9 @@ const updateActiveSection = () => {
   });
 
   navLi.forEach((li) => {
-    $(li).find("a").removeClass("active");
+    $(li).find(".nav-link").removeClass("active");
     if (li.classList.contains(activeSection)) {
-      $(li).find("a").addClass("active");
+      $(li).find(".nav-link").addClass("active");
     }
   });
 };
@@ -321,9 +321,8 @@ window.addEventListener("resize", debounce(updateActiveSection, 100));
 //Evitar deixar actiu amb mòbils
 $(".nav-link").each(function () {
   const navlink = $(this);
-  navlink.on("touchend click", (e) => {
+  navlink.on("touchend", (e) => {
     e.preventDefault();
-    navlink.addClass("active");
     window.location.href = navlink.attr("href");
   });
 });
