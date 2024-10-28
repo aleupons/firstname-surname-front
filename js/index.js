@@ -326,6 +326,14 @@ $('#menu').on('show.bs.collapse', () => {
 $('#menu').on('hide.bs.collapse', () => {
   menuLateral.css("box-shadow", "none");
 });
+
+window.onload = function () {
+  $('.nav-item li').click(function () {
+    if ($(this).find('a').attr('href') != '#') {
+      window.location.href = $(this).find('a').attr('href');
+    }
+  });
+}
 /* */
 
 /* Links */
