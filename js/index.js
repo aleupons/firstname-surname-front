@@ -325,6 +325,9 @@ $(".nav-link").each(function () {
     e.preventDefault();
     window.location.href = navlink.attr("href");
   });
+  navlink.on("click", (e) => {
+    e.preventDefault();
+  });
 });
 
 const menuLateral = $(".menuLateral");
