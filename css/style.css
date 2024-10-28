@@ -132,15 +132,16 @@ body {
 }
 
 .social-links button,
-.nav a {
+.nav .nav-link {
   color: var(--color-text);
   transition: all 0.3s ease;
   border-radius: 0;
+  cursor: pointer;
 }
 
   .social-links button:hover,
-  .nav a:hover,
-  .nav li a.active {
+  .nav .nav-link:hover,
+  .nav li .nav-link.active {
     background-color: var(--color-text);
     color: var(--color-principal) !important;
   }
@@ -175,7 +176,7 @@ h2 {
 
 .titol:not(:hover),
 .titolForm,
-li.nav-item a:not(.active).titol:not(:hover) {
+li.nav-item .nav-link:not(.active).titol:not(:hover) {
   color: var(--color-alternatiu) !important;
 }
 
