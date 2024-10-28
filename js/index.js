@@ -322,9 +322,9 @@ window.addEventListener("resize", debounce(updateActiveSection, 100));
 $(".nav-link").each(function () {
   const navlink = $(this);
   navlink.on("touchstart", (e) => {
-    e.preventDefault();
-  });
-  navlink.on("touchend", (e) => {
+    setTimeout(() => {
+      window.location.href = navlink.attr("href");
+    }, 10);
     e.preventDefault();
   });
   navlink.on("click", (e) => {
