@@ -310,10 +310,11 @@ const updateActiveSection = () => {
 window.addEventListener("scroll", updateActiveSection);
 window.addEventListener("resize", updateActiveSection);
 
+//Evitar deixar actiu amb mòbils
 $(".nav-link").each(function () {
   $(this).on("touchstart", (e) => {
     e.preventDefault();
-    console.log("aaa");
+    $(this).click();
   });
 });
 
