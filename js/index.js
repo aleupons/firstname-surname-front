@@ -307,16 +307,15 @@ const updateActiveSection = () => {
   });
 };
 
-const debounce = (func, delay) => {
-  let timeout;
-  return (...args) => {
-    clearTimeout(timeout);
-    timeout = setTimeout(() => func.apply(this, args), delay);
-  };
-};
+window.addEventListener("scroll", updateActiveSection);
+window.addEventListener("resize", updateActiveSection);
 
-window.addEventListener("scroll", debounce(updateActiveSection, 50));
-window.addEventListener("resize", debounce(updateActiveSection, 50));
+$(".nav-link").each(function () {
+  $(this).on("touchstart", (e) => {
+    e.preventDefault();
+    console.log("aaa");
+  });
+});
 
 const menuLateral = $(".menuLateral");
 $('#menu').on('show.bs.collapse', () => {
@@ -345,14 +344,9 @@ $(".social-links button").on("click", (e) => {
 /* */
 
 $(document).ready(async function() {
+  /* Menu */
   updateActiveSection();
-
-  $(".nav-link").each(function () {
-    $(this).on("click touchstart", (e) => {
-      e.preventDefault();
-      console.log("aaa");
-    });
-  });
+  /* */
 
   /* Idiomes */
   const webData = JSON.parse(localStorage.getItem("webData"));
