@@ -140,7 +140,7 @@ body {
 
   .social-links button:hover,
   .nav a:hover,
-  .nav li.active a {
+  .nav li a.active {
     background-color: var(--color-text);
     color: var(--color-principal);
   }
@@ -175,7 +175,7 @@ h2 {
 
 .titol:not(:hover),
 .titolForm,
-li.nav-item:not(.active) .titol:not(:hover) {
+li.nav-item a:not(.active).titol:not(:hover) {
   color: var(--color-alternatiu);
 }
 
