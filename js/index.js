@@ -322,9 +322,6 @@ window.addEventListener("resize", debounce(updateActiveSection, 100));
 $(".nav-link").each(function () {
   $(this).on("touchstart", (e) => {
     e.preventDefault();
-  });
-  $(this).on("touchend", (e) => {
-    e.preventDefault();
     window.location.href = $(this).attr("href");
   });
 });
