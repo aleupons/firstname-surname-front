@@ -282,11 +282,6 @@ const setCarousel = (carouselId, dades) => {
 /* */
 
 /* Menu */
-$(".nav-link").each(function () {
-  $(this).on("touch", (e) => {e.preventDefault(); console.log("aaa");});
-  $(this).prev(".nav-item").on("touch", (e) => {e.preventDefault(); console.log("bbb");});
-});
-
 responsiveMenu();
 
 const updateActiveSection = () => {
@@ -351,6 +346,13 @@ $(".social-links button").on("click", (e) => {
 
 $(document).ready(async function() {
   updateActiveSection();
+
+  $(".nav-link").each(function () {
+    $(this).on("touch", (e) => {
+      e.preventDefault();
+      console.log("aaa");
+    });
+  });
 
   /* Idiomes */
   const webData = JSON.parse(localStorage.getItem("webData"));
