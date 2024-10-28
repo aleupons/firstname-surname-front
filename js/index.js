@@ -315,8 +315,8 @@ const debounce = (func, delay) => {
   };
 };
 
-window.addEventListener("scroll", debounce(updateActiveSection, 50));
-window.addEventListener("resize", debounce(updateActiveSection, 50));
+// window.addEventListener("scroll", debounce(updateActiveSection, 50));
+// window.addEventListener("resize", debounce(updateActiveSection, 50));
 
 const menuLateral = $(".menuLateral");
 $('#menu').on('show.bs.collapse', () => {
