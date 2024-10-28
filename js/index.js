@@ -348,7 +348,7 @@ $(document).ready(async function() {
   updateActiveSection();
 
   $(".nav-link").each(function () {
-    $(this).on("touchstart", (e) => {
+    $(this).on("click touchstart", (e) => {
       e.preventDefault();
       console.log("aaa");
     });
