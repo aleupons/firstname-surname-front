@@ -328,7 +328,7 @@ $(".nav-link").each(function () {
 
 const menuLateral = $(".menuLateral");
 $('#menu').on('show.bs.collapse', () => {
-  menuLateral.css("box-shadow", `2px 6px 8px 2px rgba(112, 108, 97, 0.5)`);
+  menuLateral.css("box-shadow", `2px 6px 8px 2px ${getComputedStyle(document.documentElement).getPropertyValue('--color-alternatiu').replace(")", ", 0.5)").replace("rgb", "rgba")}`);
 });
 
 $('#menu').on('hide.bs.collapse', () => {

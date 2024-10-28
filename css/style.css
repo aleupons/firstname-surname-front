@@ -1,9 +1,9 @@
 /* Color palette */
 :root {
-  --color-principal: #ffffff;
-  --color-secundari: #e1f4f3;
-  --color-text: #333333;
-  --color-alternatiu: #706c61;
+  --color-principal: rgb(255, 255, 255); /*#ffffff;*/
+  --color-secundari: rgb(225, 244, 243); /*#e1f4f3;*/
+  --color-text: rgb(51, 51, 51); /*#333333;*/
+  --color-alternatiu: rgb(112, 108, 97); /*#706c61;*/
 }
 /*  */
 
