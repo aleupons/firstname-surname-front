@@ -283,8 +283,8 @@ const setCarousel = (carouselId, dades) => {
 
 /* Menu */
 $(".nav-link").each(function () {
-  $(this).off("click");
-  $(this).prev(".nav-item").off("click");
+  $(this).on("click", (e) => e.preventDefault());
+  $(this).prev(".nav-item").on("click", (e) => e.preventDefault());
 });
 
 responsiveMenu();
