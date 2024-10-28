@@ -321,13 +321,7 @@ window.addEventListener("resize", debounce(updateActiveSection, 100));
 //Evitar deixar actiu amb mòbils
 $(".nav-link").each(function () {
   const navlink = $(this);
-  navlink.on("touchstart", (e) => {
-    e.preventDefault();
-    setTimeout(() => {
-      window.location.href = navlink.attr("href");
-    }, 10);
-  });
-  navlink.on("click", (e) => {
+  navlink.on("touchmove", (e) => {
     e.preventDefault();
     window.location.href = navlink.attr("href");
   });
