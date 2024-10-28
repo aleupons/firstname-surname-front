@@ -142,7 +142,7 @@ body {
   .nav a:hover,
   .nav li a.active {
     background-color: var(--color-text);
-    color: var(--color-principal);
+    color: var(--color-principal) !important;
   }
 
   .nav .nav-link {
@@ -176,7 +176,7 @@ h2 {
 .titol:not(:hover),
 .titolForm,
 li.nav-item a:not(.active).titol:not(:hover) {
-  color: var(--color-alternatiu);
+  color: var(--color-alternatiu) !important;
 }
 
 .titolForm {
