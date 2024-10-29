@@ -316,13 +316,14 @@ const debounce = (func, delay) => {
 };
 
 window.addEventListener("scroll", updateActiveSection);
-// window.addEventListener("resize", debounce(updateActiveSection, 100));
+window.addEventListener("resize", updateActiveSection);
 
 //Evitar deixar actiu amb mòbils
 $(".nav-link").each(function () {
   const navlink = $(this);
   navlink.on("touchstart touchend click", (e) => {
     e.preventDefault();
+    updateActiveSection();
     window.location.href = navlink.attr("href");
   });
 });
