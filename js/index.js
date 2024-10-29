@@ -284,8 +284,7 @@ const setCarousel = (carouselId, dades) => {
 /* Menu */
 responsiveMenu();
 
-const updateActiveSection = (t) => {
-  console.log(t);
+const updateActiveSection = () => {
   const sections = document.querySelectorAll("section");
   const navLi = document.querySelectorAll(".navbar-nav.nav li");
   let maxVisibleArea = 0;
@@ -316,8 +315,8 @@ const debounce = (func, delay) => {
   };
 };
 
-window.addEventListener("scroll", () => updateActiveSection("scroll"));
-// window.addEventListener("resize", () => updateActiveSection("resize"));
+window.addEventListener("scroll", updateActiveSection);
+window.addEventListener("resize", debounce(updateActiveSection, 100));
 
 //Evitar deixar actiu amb mòbils
 $(".nav-link").each(function () {
