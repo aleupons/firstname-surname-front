@@ -315,7 +315,7 @@ const updateActiveSection = () => {
   });
 };
 
-window.addEventListener("scroll", debounce(updateActiveSection, 100));
+window.addEventListener("scroll", updateActiveSection);
 window.addEventListener("resize", updateActiveSection);
 
 //Evitar deixar actiu amb mòbils
