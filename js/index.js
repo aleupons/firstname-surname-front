@@ -284,6 +284,15 @@ const setCarousel = (carouselId, dades) => {
 /* Menu */
 responsiveMenu();
 
+//Evitar deixar actiu amb mòbils
+$(".nav-link").each(function () {
+  const navlink = $(this);
+  navlink.on("touchstart touchend click", (e) => {
+    e.preventDefault();
+    window.location.href = navlink.attr("href");
+  });
+});
+
 const updateActiveSection = () => {
   const sections = document.querySelectorAll("section");
   const navLi = document.querySelectorAll(".navbar-nav.nav li");
@@ -317,15 +326,6 @@ const debounce = (func, delay) => {
 
 window.addEventListener("scroll", updateActiveSection);
 window.addEventListener("resize", updateActiveSection);
-
-//Evitar deixar actiu amb mòbils
-$(".nav-link").each(function () {
-  const navlink = $(this);
-  navlink.on("touchstart touchend touchmove click", (e) => {
-    e.preventDefault();
-    window.location.href = navlink.attr("href");
-  });
-});
 
 const menuLateral = $(".menuLateral");
 $('#menu').on('show.bs.collapse', () => {
