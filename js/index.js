@@ -314,6 +314,16 @@ const updateActiveSection = () => {
       $(li).find(".nav-link").addClass("active");
     }
   });
+
+  //Evitar deixar actiu amb mòbils
+  $(".nav-link").each(function () {
+    const navlink = $(this);
+    navlink.off();
+    navlink.on("touchstart touchend click", (e) => {
+      e.preventDefault();
+      window.location.href = navlink.attr("href");
+    });
+  });
 };
 
 const debounce = (func, delay) => {
