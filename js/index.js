@@ -325,13 +325,6 @@ $(".nav-link").each(function () {
     e.preventDefault();
     window.location.href = navlink.attr("href");
   });
-
-  navlink.on("toushstart", console.log("touchstart"));
-  navlink.on("touchend", console.log("touchend"));
-  navlink.on("mousedown", console.log("mousedown"));
-  navlink.on("focus", console.log("focus"));
-  navlink.on("mouseup", console.log("mouseup"));
-  navlink.on("click", console.log("click"));
 });
 
 const menuLateral = $(".menuLateral");
