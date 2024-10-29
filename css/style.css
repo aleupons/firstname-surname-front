@@ -96,7 +96,7 @@ body {
 
   .social-links,
   .menuLateral {
-    /* position: sticky; */
+    position: sticky;
     top: 50%;
     transform: translate(0, -50%);
     background-color: var(--color-principal);
