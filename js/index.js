@@ -316,7 +316,7 @@ const debounce = (func, delay) => {
 };
 
 window.addEventListener("scroll", updateActiveSection);
-window.addEventListener("resize", debounce(updateActiveSection, 100));
+// window.addEventListener("resize", debounce(updateActiveSection, 100));
 
 //Evitar deixar actiu amb mòbils
 $(".nav-link").each(function () {
