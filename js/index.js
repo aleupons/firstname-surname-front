@@ -318,13 +318,6 @@ const debounce = (func, delay) => {
 window.addEventListener("scroll", updateActiveSection);
 window.addEventListener("resize", updateActiveSection);
 
-window.addEventListener("toushstart", console.log("touchstart"));
-window.addEventListener("touchend", console.log("touchend"));
-window.addEventListener("mousedown", console.log("mousedown"));
-window.addEventListener("focus", console.log("focus"));
-window.addEventListener("mouseup", console.log("mouseup"));
-window.addEventListener("click", console.log("click"));
-
 //Evitar deixar actiu amb mòbils
 $(".nav-link").each(function () {
   const navlink = $(this);
@@ -332,6 +325,13 @@ $(".nav-link").each(function () {
     e.preventDefault();
     window.location.href = navlink.attr("href");
   });
+
+  navlink.addEventListener("toushstart", console.log("touchstart"));
+  navlink.addEventListener("touchend", console.log("touchend"));
+  navlink.addEventListener("mousedown", console.log("mousedown"));
+  navlink.addEventListener("focus", console.log("focus"));
+  navlink.addEventListener("mouseup", console.log("mouseup"));
+  navlink.addEventListener("click", console.log("click"));
 });
 
 const menuLateral = $(".menuLateral");
