@@ -284,6 +284,14 @@ const setCarousel = (carouselId, dades) => {
 /* Menu */
 responsiveMenu();
 
+const debounce = (func, delay) => {
+  let timeout;
+  return (...args) => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func.apply(this, args), delay);
+  };
+};
+
 const updateActiveSection = () => {
   const sections = document.querySelectorAll("section");
   const navLi = document.querySelectorAll(".navbar-nav.nav li");
@@ -307,15 +315,7 @@ const updateActiveSection = () => {
   });
 };
 
-const debounce = (func, delay) => {
-  let timeout;
-  return (...args) => {
-    clearTimeout(timeout);
-    timeout = setTimeout(() => func.apply(this, args), delay);
-  };
-};
-
-window.addEventListener("scroll", updateActiveSection);
+window.addEventListener("scroll", debounce(updateActiveSection, 100));
 window.addEventListener("resize", updateActiveSection);
 
 //Evitar deixar actiu amb mòbils

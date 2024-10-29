@@ -12,7 +12,7 @@ body {
   font-family: Arial, sans-serif;
   color: var(--color-text);
   background-color: var(--color-principal);
-  /* min-height: 100vh; */
+  min-height: 100vh;
 }
 
 .main-wrapper {
@@ -96,7 +96,7 @@ body {
 
   .social-links,
   .menuLateral {
-    position: sticky;
+    /* position: sticky; */
     top: 50%;
     transform: translate(0, -50%);
     background-color: var(--color-principal);
